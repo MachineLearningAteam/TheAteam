@@ -106,7 +106,7 @@ public class Ants extends JPanel{
 		aboutFrame.setLocation(300, 300);
 		
 		
-
+		//シミュレーション領域をクリックするとクリックしたセルにPlace Tileで選択されているやつが配置されるやつ
 		addMouseListener(new MouseAdapter(){
 			//シミュレーション領域がクリックされた時の処理
 			@Override
@@ -128,7 +128,7 @@ public class Ants extends JPanel{
 				cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 				cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
 				nests.remove(cellArray[clickedCellColumn][clickedCellRow]);
-				//左クリックされていたならPlace tileで選択されているやつをそのセルに設定する.
+				//左クリックされていたならPlace Tileで選択されているやつをそのセルに設定する.
 				if(e.getButton() == MouseEvent.BUTTON1){
 					if(Tile.OBSTACLE.equals(tile)){
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
@@ -149,25 +149,30 @@ public class Ants extends JPanel{
 			}
 		});
 
+		//シミュレーション領域上をマウスでドラッグしたときにそのセルにPlace Tileで選択されていたやつが配置されるやつ
 		addMouseMotionListener(new MouseAdapter(){
+			//以前マウスが置かれていたセルの座標.
 			private int previousColumn = -1;
 			private int previousRow = -1;
+			//マウスが動いた時の処理
 			@Override
 			public void mouseDragged(MouseEvent e){
+				//マウスの移動先のセルの座標
 				int clickedCellColumn = (int) (((double)e.getX())/getWidth() * columns);
 				int clickedCellRow = (int) (((double)e.getY())/getHeight() * rows);
-
+				//マウスの移動先がシミュレーション領域の範囲外の時は何もしない.
 				if(clickedCellColumn < 0 || clickedCellColumn >= columns || clickedCellRow < 0 || clickedCellRow >= rows){
 					return;
 				}
-
+				//ドラッグしながらあるセルから別のセルにマウスが移った時.
 				if(clickedCellColumn != previousColumn || clickedCellRow != previousRow){
+					//マウスの移動先のセルの初期化(そのセルに設定されていた食べ物,巣,障害物を削除する.)
 					cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false);
 					food.remove(cellArray[clickedCellColumn][clickedCellRow]);
 					cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 					cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
 					nests.remove(cellArray[clickedCellColumn][clickedCellRow]);
-
+					//Place Tileで選択されているやつを移動先のセルに設定する.
 					if(Tile.OBSTACLE.equals(tile)){
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
 					}
@@ -179,10 +184,11 @@ public class Ants extends JPanel{
 						cellArray[clickedCellColumn][clickedCellRow].setHasNest(true);
 						nests.add(cellArray[clickedCellColumn][clickedCellRow]);
 					}
-		
+					//advancedControlPanelにシミュレーション領域の環境が変更されたことを伝える.
 					advancedControlPanel.environmentChanged();
-					
+					//セルの設定を変更した後のシミュレーション領域の再描画
 					repaint();
+					//以前マウスが置かれていたセルの座標を更新する.
 					previousColumn = clickedCellColumn;
 					previousRow = clickedCellRow;
 				}
