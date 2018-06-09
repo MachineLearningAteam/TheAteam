@@ -25,13 +25,13 @@ import javax.swing.border.BevelBorder;
  */
 @SuppressWarnings("serial")
 public class Ants extends JPanel{
-
+	//Pattern(障害物の配置方法)の選択肢
 	public static enum Pattern{
-		Clear, Random, Filled;
+		Clear/*障害物なし*/, Random/*0.3の確率でランダムに障害物を配置し,中央のセルに巣を配置する*/, Filled/*全てのセルを障害物にする*/;
 	}
-
+	//セルがとり得る状態
 	public static enum Tile{
-		OBSTACLE/*障害物*/, NEST/*巣*/, GOAL, CLEAR; 
+		OBSTACLE/*障害物*/, NEST/*巣*/, GOAL/*食べ物*/, CLEAR/*何もない*/; 
 	}
 	//Place tileで選択されているやつ
 	private Tile tile = Tile.GOAL;
@@ -194,43 +194,53 @@ public class Ants extends JPanel{
 				}
 			}
 		});
-
+		//背景色を白にする.
 		setBackground(Color.WHITE);
-
+		//シミュレーション領域を巣も食べ物もない状態にする.
 		killAllCells();
 	}
 
+	//シミュレーション領域の大きさを変更したときに呼び出される.環境を初期化する.
 	public void setGridSize(int columns, int rows){
 		this.columns = columns;
 		this.rows = rows;
 		cellArray = new Cell[columns][rows];
+		//シミュレーション領域を巣も食べ物もない状態にする.
 		killAllCells();
+		//蟻の配列を消去する.
 		ants.clear();
-
+		//シミュレーション領域の中央に巣を配置する.
 		cellArray[columns/2][rows/2].setHasNest(true);
 		nests.add(cellArray[columns/2][rows/2]);
-
+		//再描画
 		repaint();
 	}
 
+	//プログラム開始時とシミュレーション領域の大きさを変更した時に呼び出される.シミュレーション領域を巣も食べ物もない状態にする.
 	public void killAllCells(){
+		//巣を全て消去する.
 		nests.clear();
+		//食べ物を全て消去する.
 		food.clear();
+		//セルの動的確保
 		for(int column = 0; column < columns; column++){
 			for(int row = 0; row < rows; row++){
 				cellArray[column][row] = new Cell(column, row);
 			}
 		}
+		//advancedControlPanelに環境が変わったことを伝える.
 		if(advancedControlPanel != null){
 			advancedControlPanel.environmentChanged();
 		}
+		//再描画
 		repaint();
 	}
 
+	//Patternを指定した時に呼び出される.指定された方法でシミュレーション領域内に障害物を配置する.
 	public void setPattern(Pattern newPattern){
-
+		//シミュレーション領域を巣も食べ物もない状態にする.
 		killAllCells();
-
+		//PatternでFilledが選択された場合全てのセルを障害物にする.
 		if(newPattern.equals(Pattern.Filled)){
 			for(int column = 0; column < columns; column++){
 				for(int row = 0; row < rows; row++){
@@ -238,6 +248,7 @@ public class Ants extends JPanel{
 				}
 			}
 		}
+		//PatternでRandomが選択された場合各セルを0.3の確率で障害物にする.
 		else if(newPattern.equals(Pattern.Random)){
 			for(int column = 0; column < columns; column++){
 				for(int row = 0; row < rows; row++){
@@ -246,24 +257,26 @@ public class Ants extends JPanel{
 					}
 				}
 			}
-			
+			//中央のセルに巣を配置する.
 			cellArray[columns/2][rows/2].setIsObstacle(false);
 			cellArray[columns/2][rows/2].setHasNest(true);
 			nests.add(cellArray[columns/2][rows/2]);
 		}
-
+		//再描画
 		repaint();
 	}
 
+	//描画処理
 	public void paintComponent(Graphics g){
-
+		//とりあえず親クラスの描画処理を呼び出す.
 		super.paintComponent(g);
-
+		//色を黒に設定する.
 		g.setColor(Color.BLACK);
-
+		//セルの横幅
 		double cellWidth = (double)getWidth()/columns;
+		//セルの高さ
 		double cellHeight = (double)getHeight()/rows;
-
+		//セルの行数と列数がともに50以下の場合セルの境界線を引く.
 		if(columns <= 50 && rows <= 50){
 
 			for(int column = 0; column < columns; column++){
@@ -276,28 +289,30 @@ public class Ants extends JPanel{
 				g.drawLine(0, cellY, getWidth(), cellY);
 			}
 		}
-
+		//各セルの描画
 		for(int column = 0; column < columns; column++){
 			for(int row = 0; row < rows; row++){
-
+				//そのセルの座標
 				int cellX = (int) (cellWidth * column);
 				int cellY = (int) (cellHeight * row);
-
+				//そのセルの横幅と高さ
 				int thisCellWidth = (int) (cellWidth*(column+1) - cellX);
 				int thisCellHeight = (int) (cellHeight*(row+1) - cellY);
-
+				//巣はオレンジ
 				if(cellArray[column][row].hasNest()){
 					g.setColor(Color.ORANGE);
 				}
+				//食べ物はランダムな色
 				else if(cellArray[column][row].isGoal()){
 					Random random = new Random(cellArray[column][row].hashCode());
 					g.setColor(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256), 255));
 				}
+				//障害物は灰色
 				else if(cellArray[column][row].isBlocked()){
 					g.setColor(Color.GRAY);
 				}
+				//そのセルに何もないときは巣のフェロモンと食べ物のフェロモンの強さに応じた色を設定する.
 				else{
-
 					double nestPheromone = Math.min(1, (cellArray[column][row].nestPheromoneLevel-1)/Cell.maxNestPheromoneLevel);
 					double foodPheromone = 0;
 					double maxFood = 0;
@@ -325,71 +340,83 @@ public class Ants extends JPanel{
 						g.setColor(Color.white);
 					}
 				}
+				//指定した色でセルを塗りつぶす.
 				g.fillRect(cellX+1, cellY+1, Math.max(thisCellWidth-1, 1), Math.max(thisCellHeight-1, 1));
 			}
 		}
-
+		//蟻の描画
 		for(Ant ant : ants){
+			//その蟻のいるセルの行番号と列番号
 			int column = ant.getCol();
 			int row = ant.getRow();
+			//その蟻の画面上の座標
 			int cellX = (int) (cellWidth * column);
 			int cellY = (int) (cellHeight * row);
+			//その蟻のいるセルの幅と高さ
 			int thisCellWidth = (int) (cellWidth*(column+1) - cellX);
 			int thisCellHeight = (int) (cellHeight*(row+1) - cellY);
-
+			//巣に戻ろうとしている蟻は青
 			if(ant.isReturningHome()){
 				g.setColor(Color.BLUE);
 			}
+			//まだ食べ物を探している蟻は黒
 			else{
 				g.setColor(Color.BLACK);
 			}
-
+			//指定された色で蟻を描画する.
 			g.fillRect(cellX+2, cellY+2, thisCellWidth-3, thisCellHeight-3);
 		}
 	}
 
+	//食べ物があるセルの集合を返す.
 	public Set<Cell> getFood(){
 		return food;
 	}
 
+	//巣があるセルの集合を返す.
 	public Set<Cell> getNests(){
 		return nests;
 	}
 
+	//状態遷移関数
 	public void step(){
-
+		//蟻の数が最大数を超えていない場合ランダムに選択した巣に新しい蟻を作る.
 		if(ants.size() < maxAnts){
 			if(!nests.isEmpty()){
 				int nestIndex = (int) (nests.size() * Math.random());
 				ants.add(new Ant((Cell) nests.toArray()[nestIndex], cellArray, this));
 			}
 		}
+		//蟻の数が最大値を超えている場合蟻の配列の先頭要素を削除する.
 		else if(ants.size() > maxAnts){
 			ants.remove(0);
 		}
-
+		//各蟻の状態遷移関数を呼び出す.
 		for(Ant ant : ants){
 			ant.step();
 		}
-
+		//各セルの状態遷移関数を呼び出す.
 		for(int column = 0; column < columns; column++){
 			for(int row = 0; row < rows; row++){
 				cellArray[column][row].step();
 			}
 		}
-
+		//再描画
 		repaint();
 	}
-	
+
+	//AdvancedのAboutを呼び出した時に呼び出される関数.各パラメータの説明書きを表示する.
 	public void showAboutFrame(){
 		messageFrame.dispose();
 		aboutFrame.setVisible(true);
 	}
 
+	//Place Tileのボタンを押した時に呼び出される関数.セルをクリックした時にそのセルをどの状態に変えるかを変更する.
 	public void setTileToAdd(Tile tile) {
 		this.tile = tile;
 	}
 
+	//Ant Countのスライダーを動かした時に呼び出される関数.蟻の数の最大値を変更する.
 	public void setMaxAnts(int maxAnts) {
 		this.maxAnts = maxAnts;
 		while(ants.size() > maxAnts){

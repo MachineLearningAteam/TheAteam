@@ -31,6 +31,7 @@ public class AntsControlPanel {
 	private JButton timerButton = new JButton("\u25BA");
 	private JSlider speedSlider;
 	private JComboBox patternComboBox;
+	//シミュレーション領域の大きさを設定するコンボボックス
 	private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
@@ -253,7 +254,7 @@ public class AntsControlPanel {
 		patternComboBox.setSelectedIndex(-1);
 
 		sizeComboBox.addItemListener(new ItemListener(){
-
+			//シミュレーション領域の大きさを変更する関数を呼び出す.
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
 				if(sizeComboBox.getSelectedItem().equals("10")){
