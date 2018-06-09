@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+//シミュレーション領域を描画するパネル
 /**
  * Class for displaying and updating an ant colony simulation.
  * Another class should be used to control the simulation
@@ -30,57 +31,57 @@ public class Ants extends JPanel{
 	}
 
 	public static enum Tile{
-		OBSTACLE, NEST, GOAL, CLEAR; 
+		OBSTACLE/*障害物*/, NEST/*巣*/, GOAL, CLEAR; 
 	}
-
+	//Place tileで選択されているやつ
 	private Tile tile = Tile.GOAL;
 
+	//シミュレーション領域内にセルが25*25個ある.
 	int rows = 25;
 	int columns = 25;
+	//セルの2次元配列
 	Cell [][] cellArray = new Cell[columns][rows];
 
 	private int maxAnts = 100;
-	private List<Ant> ants = new ArrayList<Ant>();
+	//蟻の配列
+	private List<Ant/*Ant.javaで定義されているありのクラス*/> ants = new ArrayList<Ant>();
 
+	//巣があるセルの集合
 	private Set<Cell> nests = new HashSet<Cell>();
+	//食べ物があるセルの集合
 	private Set<Cell> food = new HashSet<Cell>();
 
+	//シミュレーションの詳細設定
 	AdvancedControlPanel advancedControlPanel;
 	
+	//詳細設定のaboutを押した時に表示される各パラメータに関する説明書き
 	final JInternalFrame aboutFrame = new JInternalFrame("About", false, true);
+	//最初にシミュレーション領域の上部に表示される簡単な説明書き
 	final JInternalFrame messageFrame = new JInternalFrame("Getting Started", false, true);
 	
-
+	//コンストラクタ
 	public Ants(){
 
 		setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-		
-		
-		
-		
+		//最初にシミュレーション領域の上部に表示される簡単な説明書きを生成して表示する.
 		JLabel messageLabel1 = new JLabel("Place some food and obstacles in the environment and press play,");
 		JLabel messageLabel2 = new JLabel("then experiment by changing the environment!");
 		JLabel messageLabel3 = new JLabel("For more info, see About from the Advanced panel.");
-		
 		messageFrame.add(messageLabel1, BorderLayout.NORTH);
 		messageFrame.add(messageLabel2, BorderLayout.CENTER);
 		messageFrame.add(messageLabel3, BorderLayout.SOUTH);
-		
 		add(messageFrame);
-		
 		messageFrame.pack();
-
 		messageFrame.setLocation(300, 300);
 		messageFrame.setVisible(true);
 		
-		
-		
-		
-		
-		
+		//詳細設定のaboutを押した時に表示される各パラメータに関する説明書きを生成する.表示はしない.
 		JPanel aboutPanel = new JPanel();
+		//上からコンポーネントを追加していく.
 		aboutPanel.setLayout(new BoxLayout(aboutPanel, BoxLayout.Y_AXIS));
+		//10ピクセルの余白
 		aboutPanel.add(Box.createVerticalStrut(10));
+		//パラメータに関する説明書き
 		aboutPanel.add(new JLabel("Auto-adjust: Automatically adjust parameters over time."));
 		aboutPanel.add(Box.createVerticalStrut(10));
 		aboutPanel.add(new JLabel("Deltas: How fast each parameter should adjust."));
@@ -99,9 +100,7 @@ public class Ants extends JPanel{
 		aboutPanel.add(Box.createVerticalStrut(10));
 		aboutPanel.add(new JLabel("Food Needed: All: Ants must find all food before returning. (TSP)"));
 		aboutPanel.add(Box.createVerticalStrut(10));
-		
 		aboutFrame.setContentPane(aboutPanel);
-		
 		aboutFrame.pack();
 		add(aboutFrame);
 		aboutFrame.setLocation(300, 300);
@@ -109,29 +108,28 @@ public class Ants extends JPanel{
 		
 
 		addMouseListener(new MouseAdapter(){
+			//シミュレーション領域がクリックされた時の処理
 			@Override
 			public void mouseClicked(MouseEvent e){
-				
+				//最初にシミュレーション領域の上部に表示される簡単な説明書きを破棄する.
 				messageFrame.dispose();
+				//詳細設定のaboutを押した時に表示される各パラメータに関する説明書きの不可視化
 				aboutFrame.setVisible(false);
-				
+				//クリックされたセルの行番号と列番号
 				int clickedCellColumn = (int) (((double)e.getX())/getWidth() * columns);
 				int clickedCellRow = (int) (((double)e.getY())/getHeight() * rows);
-
+				//どのセルもクリックされていなかったら何もしない.
 				if(clickedCellColumn < 0 || clickedCellColumn >= columns || clickedCellRow < 0 || clickedCellRow >= rows){
 					return;
 				}
-
-
+				//クリックされたセルの初期化(そのセルに設定されていた食べ物,巣,障害物を削除する.)
 				cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false);
 				food.remove(cellArray[clickedCellColumn][clickedCellRow]);
 				cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 				cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
 				nests.remove(cellArray[clickedCellColumn][clickedCellRow]);
-
-
+				//左クリックされていたならPlace tileで選択されているやつをそのセルに設定する.
 				if(e.getButton() == MouseEvent.BUTTON1){
-
 					if(Tile.OBSTACLE.equals(tile)){
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
 					}
@@ -144,9 +142,9 @@ public class Ants extends JPanel{
 						nests.add(cellArray[clickedCellColumn][clickedCellRow]);
 					}
 				}
-				
+				//advancedControlPanelにシミュレーション領域の環境が変更されたことを伝える.
 				advancedControlPanel.environmentChanged();
-
+				//セルの設定を変更した後のシミュレーション領域の再描画
 				repaint();
 			}
 		});

@@ -45,6 +45,7 @@ public class AdvancedControlPanel {
 	private double stepsToMax = 1000;
 	
 	//when environment changes, timeout to adjust
+	//シミュレーション領域の環境が変更されてからの経過ステップ数
 	private double changedTimeout = stepsToMax;
 
 	//delta values adjust parameters on the fly
@@ -373,6 +374,8 @@ public class AdvancedControlPanel {
 		panel.add(Box.createGlue());
 	}
 
+	//シミュレーション領域の環境が変更されたときに呼び出されるメソッド.
+	//シミュレーション領域の環境が変更されてからのステップ数が0になる.
 	public void environmentChanged(){
 		changedTimeout = 0;
 	}
