@@ -9,13 +9,13 @@ import java.util.ArrayList;
  * Ant agent that interacts with an ant colony simulation evironment.
  */
 public class Ant {
-
+	//その蟻が見つけた食べ物のセルの集合
 	Set<Cell> foodFound = new HashSet<Cell>();
 
 	public static double dropoffRate = .9;
 	public static double bestCellNext = 0.5;
 	public static boolean allFoodRequired = false;
-
+	//その蟻がいるセルの行番号列番号
 	private int x;
 	private int y;
 

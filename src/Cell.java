@@ -3,32 +3,44 @@ import java.util.Map;
 
 
 public class Cell {
-
+	//食べ物フェロモンの最大値
 	public static double maxFoodPheromoneLevel = 100.0;
+	//巣のフェロモンの最大値
 	public static double maxNestPheromoneLevel = 100.0;
+	//フェロモンの蒸発率
 	public static double evaporationRate = .9;
+	//そのセルに障害物があるかどうか
 	private boolean hasObstacle;
+	//そのセルに巣があるかどうか
 	private boolean hasNest;
-	public Map<Cell, Double> foodPheromoneLevelMap = new HashMap<Cell, Double>();
+	//食べ物フェロモン
+	public Map<Cell/*食べ物セル*/, Double/*その食べ物セルのフェロモンが自分のセルにどれくらい届いているか*/> foodPheromoneLevelMap = new HashMap<Cell, Double>();
+	//そのセルの巣のフェロモン
 	public double nestPheromoneLevel = 1.0;
+	//そのセルに食べ物があるかどうか
 	private boolean isGoal = false;
-	
+	//そのセルの行番号列番号
 	int c;
 	int r;
-	
+
+	//コンストラクタ.行番号と列番号を指定する.
 	public Cell(int c, int r){
 		this.c = c;
 		this.r = r;
 	}
-	
+
+	//そのセルに食べ物があるかどうかを設定する.
 	public void setIsGoal(boolean isGoal){
 		this.isGoal = isGoal;
 	}
 	
+	//状態遷移関数
 	public void step(){
-		
+		//そのセルにフェロモンが届いている各食べ物セルについて
 		for(Cell food : foodPheromoneLevelMap.keySet()){
+			//その食べ物セルから届いている食べ物フェロモンの強さ
 			double foodPheromoneLevel = foodPheromoneLevelMap.get(food);
+			//食べ物フェロモンを蒸発させる.
 			foodPheromoneLevel *= Cell.evaporationRate;
 			if(foodPheromoneLevel < 1){
 				foodPheromoneLevel = 1;
@@ -36,19 +48,20 @@ public class Cell {
 			if(foodPheromoneLevel > Cell.maxFoodPheromoneLevel){
 				foodPheromoneLevel = Cell.maxFoodPheromoneLevel;
 			}
+			//食べ物フェロモンの強さを更新する.
 			foodPheromoneLevelMap.put(food, foodPheromoneLevel);
 		}
-		
+		//巣のフェロモンを蒸発させる.
 		nestPheromoneLevel *= Cell.evaporationRate;
 		if(nestPheromoneLevel < 1){
 			nestPheromoneLevel = 1;
 		}
-		
 		if(nestPheromoneLevel > Cell.maxNestPheromoneLevel){
 			nestPheromoneLevel = Cell.maxNestPheromoneLevel;
 		}
 	}
 
+	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
 	public void setFoodPheromone(Cell food, double pheromone){
 		if(pheromone > Cell.maxFoodPheromoneLevel){
 			pheromone = Cell.maxFoodPheromoneLevel;
