@@ -2,7 +2,7 @@
 ## 使い方
 ### コンパイル
 ```
-$ javac *.java
+$ javac -encoding utf-8 *.java
 ```
 ### 実行
 ```
