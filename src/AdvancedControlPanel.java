@@ -17,13 +17,16 @@ import javax.swing.event.ChangeListener;
 /**
  * Advanced controller of the Ants class.
  */
+//各パラメータの設定に関するクラス.
 public class AdvancedControlPanel {
-
+	//シミュレーション領域
 	private Ants ants;
+	//Advancedを押すと画面の下側に出るやつ
 	private JPanel panel = new JPanel();
 
 	
 	//minimum values for parameters
+	//各パラメータの最小値
 	private final double minMaxpheromone = 10;
 	private final double minEvaporation = 2;
 	private final double minDropoff = 5;
@@ -31,6 +34,7 @@ public class AdvancedControlPanel {
 	private final double minStepsToMax = 100;
 	
 	//maximum values for parameters
+	//各パラメータの最大値
 	private final double maxMaxpheromone = 100;
 	private final double maxEvaporation = 10;
 	private final double maxDropoff = 25;
@@ -38,10 +42,15 @@ public class AdvancedControlPanel {
 	private final double maxStepsToMax = 2000;
 	
 	//start values for parameters
+	//フェロモンの最大値
 	private double maxpheromone = maxMaxpheromone;
+	//セルが持っているフェロモンの蒸発率
 	private double evaporation = minEvaporation;
+	//蟻が持っているフェロモンの減少率
 	private double dropoff = minDropoff;
+	//蟻が最も強いフェロモンを持つ隣接セルを移動先とする確率.
 	private double chanceOfBestNext = 50;
+	//パラメータの調整の細かさ
 	private double stepsToMax = 1000;
 	
 	//when environment changes, timeout to adjust
@@ -49,21 +58,25 @@ public class AdvancedControlPanel {
 	private double changedTimeout = stepsToMax;
 
 	//delta values adjust parameters on the fly
+	//各パラメータの調整の粗さ
 	private double deltapheromone = 1000;
 	private double deltaEvaporation = 250;
 	private double deltaDropoff = 250;
 	private double deltaTrail = 1000;
 
 	//whether adjustments should be made automatically
+	//各パラメータを自動調整するかどうかを設定するチェックボックス
 	private final JCheckBox adjustCheckBox = new JCheckBox("Auto-Adjust");
 
 	//sliders to adjust environment parameters
+	//各パラメータを調整するためのスライダー
 	private final JSlider maxpheromoneSlider = new JSlider();
 	private final JSlider evaporationRateSlider = new JSlider();
 	private final JSlider dropoffRateSlider = new JSlider();
 	private final JSlider chanceOfBestNextSlider = new JSlider();
 
-	public AdvancedControlPanel(final Ants ants){
+	//コンストラクタ
+	public AdvancedControlPanel(final Ants ants/*シミュレーション領域*/){
 		this.ants = ants;
 
 		ants.advancedControlPanel = this;
