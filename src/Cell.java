@@ -69,6 +69,7 @@ public class Cell {
 		foodPheromoneLevelMap.put(food, pheromone);
 	}
 	
+	//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 	public void setNestPheromone(double pheromone){
 		
 		nestPheromoneLevel = pheromone;
@@ -77,6 +78,7 @@ public class Cell {
 		}
 	}
 	
+	//指定された食べ物セルからこのセルに行き届いている食べ物フェロモンの強さを返す.
 	public double getFoodPheromoneLevel(Cell food){
 		if(!foodPheromoneLevelMap.containsKey(food)){
 			return 1;
@@ -84,26 +86,32 @@ public class Cell {
 		return foodPheromoneLevelMap.get(food);
 	}
 	
+	//そのセルが持っている巣のフェロモンの強さを返す.
 	public double getNestPheromoneLevel(){
 		return nestPheromoneLevel;
 	}
 	
+	//そのセルに障害物があるかどうか.
 	public boolean isBlocked(){
 		return hasObstacle;
 	}
 
+	//そのセルに食べ物があるかどうか.
 	public boolean isGoal() {
 		return isGoal;
 	}
 
+	//そのセルに障害物があるかどうかを設定する.
 	public void setIsObstacle(boolean hasObstacle) {
 		this.hasObstacle = hasObstacle;
 	}
 
+	//そのセルに巣があるかどうか.
 	public boolean hasNest() {
 		return hasNest;
 	}
 
+	//そのセルに巣があるかどうかを設定する.
 	public void setHasNest(boolean hasNest) {
 		this.hasNest = hasNest;
 	}	

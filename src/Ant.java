@@ -100,7 +100,9 @@ public class Ant {
 							
 							for(Cell food : foodFound){
 
+								//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 								if(!maxFoodSoFarMap.containsKey(food) || world[x+c][y+r].getFoodPheromoneLevel(food) > maxFoodSoFarMap.get(food)){
+									//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 									maxFoodSoFarMap.put(food, world[x+c][y+r].getFoodPheromoneLevel(food));
 								}
 							}	
@@ -113,6 +115,7 @@ public class Ant {
 				}
 
 				for(Cell food : foodFound){
+					//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
 					world[x][y].setFoodPheromone(food, maxFoodSoFarMap.get(food) * Ant.dropoffRate);
 				}
 
@@ -195,7 +198,9 @@ public class Ant {
 						for(Cell food : foodFound){
 
 
+							//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 							if(!maxFoodSoFarMap.containsKey(food) || world[x+c][y+r].getFoodPheromoneLevel(food) > maxFoodSoFarMap.get(food)){
+								//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 								maxFoodSoFarMap.put(food, world[x+c][y+r].getFoodPheromoneLevel(food));
 							}
 
@@ -206,6 +211,7 @@ public class Ant {
 						}
 
 						for(Cell food : foodFound){
+							//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
 							world[x][y].setFoodPheromone(food, maxFoodSoFarMap.get(food) * Ant.dropoffRate);
 						}
 
@@ -222,13 +228,15 @@ public class Ant {
 								if(foodFound.contains(food)){
 									continue;
 								}
+								//指定された食べ物セルからこのセルに行き届いている食べ物フェロモンの強さを返す.
 								totalNeighborPheromones += world[x+c][y+r].getFoodPheromoneLevel(food);
-
+								//指定された食べ物セルからこのセルに行き届いている食べ物フェロモンの強さを返す.
 								if(world[x+c][y+r].getFoodPheromoneLevel(food) > maxFoodSoFar){
 									maxFoodSoFar = world[x+c][y+r].getFoodPheromoneLevel(food);
 									maxFoodCells.clear();
 									maxFoodCells.add(world[x+c][y+r]);
 								}
+								//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 								else if(world[x+c][y+r].getFoodPheromoneLevel(food) == maxFoodSoFar){
 									maxFoodCells.add(world[x+c][y+r]);
 								}
@@ -242,6 +250,7 @@ public class Ant {
 				maxNestSoFar = Cell.maxNestPheromoneLevel;
 			}
 
+			//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 			world[x][y].setNestPheromone(maxNestSoFar * Ant.dropoffRate);
 
 			if(Ant.bestCellNext > chanceToTakeBest){
@@ -273,6 +282,7 @@ public class Ant {
 							if(foodFound.contains(food)){
 								continue;
 							}
+							//蟻が巣のフェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた巣のフェロモンに更新する.
 							pheremonesSoFar+=neighbor.getFoodPheromoneLevel(food);
 							if(pheremonesSoFar > goalPheromoneLevel){
 
