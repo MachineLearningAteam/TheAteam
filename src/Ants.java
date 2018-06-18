@@ -313,7 +313,6 @@ public class Ants extends JPanel{
 				}
 				//そのセルに何もないときは巣のフェロモンと食べ物のフェロモンの強さに応じた色を設定する.
 				else{
-					//double nestPheromone = Math.min(1, (cellArray[column][row].nestPheromoneLevel-1)/Cell.maxNestPheromoneLevel);
 					double foodPheromone = 0;
 					double maxFood = 0;
 					Cell maxFoodCell = null;
@@ -326,12 +325,6 @@ public class Ants extends JPanel{
 						foodPheromone = Math.max(foodPheromone, Math.min(1, (cellArray[column][row].getFoodPheromoneLevel(food)-1)/Cell.maxFoodPheromoneLevel));
 					}
 
-					/*
-					if(nestPheromone > foodPheromone){
-
-						g.setColor(new Color(0, 255, 0, (int) (255*nestPheromone)));
-					}
-					*/
 					if(maxFoodCell != null ){
 
 						Random random = new Random(maxFoodCell.hashCode());

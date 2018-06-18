@@ -99,7 +99,6 @@ public class AdvancedControlPanel {
 			public void stateChanged(ChangeEvent e) {
 
 				Cell.maxFoodPheromoneLevel = maxpheromoneSlider.getValue();
-				//Cell.maxNestPheromoneLevel = maxpheromoneSlider.getValue();
 				ants.repaint();
 
 			}
@@ -410,14 +409,6 @@ public class AdvancedControlPanel {
 			
 			//does every nest have a trail?
 			boolean allNestsHaveTrail = true;
-			/*
-			for(Cell nest : ants.getNests()){
-				if(nest.nestPheromoneLevel <= 1){
-					allNestsHaveTrail = false;
-					break;
-				}
-			}
-			*/
 
 			
 			if(changedTimeout >= stepsToMax && allFoodHasTrail && allNestsHaveTrail){
