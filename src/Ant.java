@@ -12,7 +12,7 @@ public class Ant {
 	//その蟻が見つけた食べ物のセルの集合
 	Set<Cell> foodFound = new HashSet<Cell>();
 
-	//単位時間進むごとに蟻が持っている食べ物フェロモンや巣のフェロモンが減少する割合
+	//単位時間進むごとに蟻が持っている食べ物フェロモンが減少する割合
 	public static double dropoffRate = .9;
 	//ある確率で移動先のセルの選択の基準が変わってるっぽい
 	public static double bestCellNext = 0.5;
@@ -21,12 +21,12 @@ public class Ant {
 	//その蟻がいるセルの行番号列番号
 	private int x;
 	private int y;
-	//ひとつの食べ物または全ても食べ物を得て帰還モードに入っているかどうか.
+	//ひとつの食べ物または全ても食べ物を得て帰還モードに入っているかどうか.(期間モードには入らないようにする)
 	private boolean returnToNest;
 	//その蟻がいる世界
 	Cell[][] world;
 	//使用されていない謎の変数
-	double maxPheromone = 10.0;
+	//double maxPheromone = 10.0;
 	//巣もしくは食べ物を出発してからの経過ステップ数
 	int steps = 0;
 	//その蟻がいるシミュレーション領域
@@ -41,6 +41,7 @@ public class Ant {
 	}
 
 	//その蟻が必要な食べ物を得て巣に帰還した時に呼び出される.蟻は死に,ランダムな巣にまた生まれる.
+	/*
 	public void die(){
 		returnToNest = false;
 		steps = 0;
@@ -53,6 +54,7 @@ public class Ant {
 			y = nest.r;
 		}
 	}
+	*/
 
 	//状態遷移関数
 	public void step(){
@@ -66,6 +68,7 @@ public class Ant {
 		foodFound.retainAll(ants.getFood());
 
 		//巣に帰ろうとしている時
+		/*
 		if(returnToNest){
 			//巣に帰ったら死ぬ.
 			if(world[x][y].hasNest()){
@@ -76,7 +79,7 @@ public class Ant {
 				//今までに調べた隣接セルの中で最も強い巣のフェロモン
 				double maxNestSoFar = 0;
 				//その食べ物セルから隣接セルに届いている食べ物フェロモンの最大値
-				Map<Cell/*食べ物セル*/, Double/*隣接セルのうちその食べ物セルから届いている食べ物フェロモンが最も高いセルのその食べ物セルから届いている食べ物フェロモンの強さ*/> maxFoodSoFarMap = new HashMap<Cell, Double>();
+				Map<Cell, Double> maxFoodSoFarMap = new HashMap<Cell, Double>();
 				//隣接セルのうち最大の巣のフェロモンを持っている隣接セルの集合
 				List<Cell> maxNestCells = new ArrayList<Cell>();
 				//全ての隣接セル
@@ -160,15 +163,16 @@ public class Ant {
 				}
 			}
 		}
+		*/
 		//巣に帰ろうとしていない時
-		else{ //look for food
+		if(!returnToNest){ //look for food
 			//そこに食べ物がある場合
 			if(world[x][y].isGoal()){
 				//自分が見つけた食べ物セルに現在地のセルを追加する.
 				foodFound.add(world[x][y]);
 				//Food NeedでAllが選択されている場合
 				if(Ant.allFoodRequired){
-					//全ての食べ物を見つけていたら帰還モードに入る.
+					//全ての食べ物を見つけていたら帰還モードに入る.(ここを帰還モードに入らないようにする.)
 					if(foodFound.size() >= ants.getFood().size()){
 						steps = 0;
 						returnToNest = true;
@@ -177,7 +181,7 @@ public class Ant {
 				}
 				//Food NeedでOneが選択されている場合
 				else{
-					//帰還モードに入る.
+					//帰還モードに入る.(ここを帰還モードに入らないようにする.)
 					steps = 0;
 					returnToNest = true;
 					return;
@@ -186,14 +190,14 @@ public class Ant {
 			//そこに食べ物がなく巣があり出発してから時間が2以上経過している場合場合
 			else if(world[x][y].hasNest()){
 				if(steps > 1){
-					die();
+					//die();
 					return;
 				}
 			}
 			//今までに調べた隣接セルの中で最も強い食べ物フェロモン
 			double maxFoodSoFar = 0;
 			//今までに調べた隣接セルの中で最も強い巣のフェロモン
-			double maxNestSoFar = 0;
+			//double maxNestSoFar = 0;
 			//食べ物フェロモンが最も大きい隣接セルの集合
 			List<Cell> maxFoodCells = new ArrayList<Cell>();
 			//全ての隣接セル
@@ -243,9 +247,11 @@ public class Ant {
 							world[x][y].setFoodPheromone(food, maxFoodSoFarMap.get(food) * Ant.dropoffRate);
 						}
 						//今までに調べた隣接セルの中で最も強い巣のフェロモンを更新する.
+						/*
 						if(world[x+c][y+r].getNestPheromoneLevel() > maxNestSoFar){
 							maxNestSoFar = world[x+c][y+r].getNestPheromoneLevel();
 						}
+						*/
 						//環境中に食べ物セルがない場合
 						if(ants.getFood().isEmpty()){
 							totalNeighborPheromones += 1;
@@ -275,11 +281,13 @@ public class Ant {
 				}
 			}
 			//そこに巣がある場合最大の巣のフェロモンを更新する.
+			/*
 			if(world[x][y].hasNest()){
 				maxNestSoFar = Cell.maxNestPheromoneLevel;
 			}
 			//そこの巣のフェロモンを更新する.
 			world[x][y].setNestPheromone(maxNestSoFar * Ant.dropoffRate);
+			*/
 
 			//蟻の移動先を決定する.
 			//確率Ant.bestCellNextでこっちを実行する.
@@ -342,7 +350,7 @@ public class Ant {
 		return y;
 	}
 
-	//その蟻が巣に帰ろうとしているかどうか
+	//その蟻が巣に帰ろうとしているかどうか(最終的にこの関数も要らなくなる.)
 	public boolean isReturningHome() {
 		return returnToNest;
 	}
