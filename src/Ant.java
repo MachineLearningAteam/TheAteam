@@ -53,16 +53,12 @@ public class Ant {
 			foodFound.add(world[x][y]);
 			//Food NeedでAllが選択されている場合
 			if(Ant.allFoodRequired){
-				//全ての食べ物を見つけていたら帰還モードに入る.(ここを帰還モードに入らないようにする.)
-				/*
+				//全ての食べ物を見つけていたら食べ物の記憶を消去する.
 				if(foodFound.size() >= ants.getFood().size()){
-					steps = 0;
-					returnToNest = true;
-					return;
+					foodFound.clear();
 				}
-				*/
 			}
-			//Food NeedでOneが選択されている場合
+			//Food NeedでOneが選択されている場合(Oneは削除する予定)
 			else{
 				//帰還モードに入る.(ここを帰還モードに入らないようにする.)
 				/*
