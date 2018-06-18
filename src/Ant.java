@@ -68,13 +68,6 @@ public class Ant {
 				*/
 			}
 		}
-		//そこに食べ物がなく巣があり出発してから時間が2以上経過している場合場合
-		else if(world[x][y].hasNest()){
-			if(steps > 1){
-				//die();
-				return;
-			}
-		}
 		//今までに調べた隣接セルの中で最も強い食べ物フェロモン
 		double maxFoodSoFar = 0;
 		//食べ物フェロモンが最も大きい隣接セルの集合
