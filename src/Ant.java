@@ -22,7 +22,7 @@ public class Ant {
 	private int x;
 	private int y;
 	//ひとつの食べ物または全ても食べ物を得て帰還モードに入っているかどうか.(期間モードには入らないようにする)
-	private boolean returnToNest;
+	//private boolean returnToNest;
 	//その蟻がいる世界
 	Cell[][] world;
 	//巣もしくは食べ物を出発してからの経過ステップ数
@@ -50,7 +50,7 @@ public class Ant {
 		foodFound.retainAll(ants.getFood());
 
 		//巣に帰ろうとしていない時
-		if(!returnToNest){ //look for food
+		//if(!returnToNest){ //look for food
 			//そこに食べ物がある場合
 			if(world[x][y].isGoal()){
 				//自分が見つけた食べ物セルに現在地のセルを追加する.
@@ -58,18 +58,22 @@ public class Ant {
 				//Food NeedでAllが選択されている場合
 				if(Ant.allFoodRequired){
 					//全ての食べ物を見つけていたら帰還モードに入る.(ここを帰還モードに入らないようにする.)
+					/*
 					if(foodFound.size() >= ants.getFood().size()){
 						steps = 0;
 						returnToNest = true;
 						return;
 					}
+					*/
 				}
 				//Food NeedでOneが選択されている場合
 				else{
 					//帰還モードに入る.(ここを帰還モードに入らないようにする.)
+					/*
 					steps = 0;
 					returnToNest = true;
 					return;
+					*/
 				}
 			}
 			//そこに食べ物がなく巣があり出発してから時間が2以上経過している場合場合
@@ -207,7 +211,7 @@ public class Ant {
 					}
 				}
 			}
-		}
+		//}
 	}
 
 	//その蟻が何列目にいるか
@@ -221,7 +225,9 @@ public class Ant {
 	}
 
 	//その蟻が巣に帰ろうとしているかどうか(最終的にこの関数も要らなくなる.)
+	/*
 	public boolean isReturningHome() {
 		return returnToNest;
 	}
+	*/
 }

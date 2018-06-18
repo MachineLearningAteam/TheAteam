@@ -351,13 +351,15 @@ public class Ants extends JPanel{
 			int thisCellWidth = (int) (cellWidth*(column+1) - cellX);
 			int thisCellHeight = (int) (cellHeight*(row+1) - cellY);
 			//巣に戻ろうとしている蟻は青
+			/*
 			if(ant.isReturningHome()){
 				g.setColor(Color.BLUE);
 			}
+			*/
 			//まだ食べ物を探している蟻は黒
-			else{
+			//else{
 				g.setColor(Color.BLACK);
-			}
+			//}
 			//指定された色で蟻を描画する.
 			g.fillRect(cellX+2, cellY+2, thisCellWidth-3, thisCellHeight-3);
 		}
