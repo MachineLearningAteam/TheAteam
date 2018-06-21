@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,11 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-<<<<<<< HEAD
-
-=======
 //シミュレーション領域を描画するパネル
->>>>>>> 037142328baf54227b7cfe0568fdf4c442ab63ca
 /**
  * Class for displaying and updating an ant colony simulation.
  * Another class should be used to control the simulation
@@ -204,11 +201,8 @@ public class Ants extends JPanel{
 		killAllCells();
 	}
 
-<<<<<<< HEAD
-
-=======
 	//シミュレーション領域の大きさを変更したときに呼び出される.環境を初期化する.
->>>>>>> 037142328baf54227b7cfe0568fdf4c442ab63ca
+
 	public void setGridSize(int columns, int rows){
 		this.columns = columns;
 		this.rows = rows;
@@ -217,22 +211,20 @@ public class Ants extends JPanel{
 		killAllCells();
 		//蟻の配列を消去する.
 		ants.clear();
-<<<<<<< HEAD
 		int[][] feald;
 		feald = new int[100][100];
-		feald = imagefileloat;
+		Imagefileload feald_data = new Imagefileload();
+		feald = feald_data.get_feald();
 		for(int i=0;i<100;i++){
 			for(int j=0;j<100;j++){
-				if (feald)
-				cellArray[i][j].setIsObstacle(true);
+				if (feald[i][j]==1)
+					cellArray[i][j].setIsObstacle(true);
 			}
 		}
 
 		//cellArray[columns/2][rows/2].setHasNest(true);
-=======
 		//シミュレーション領域の中央に巣を配置する.
 		cellArray[columns/2][rows/2].setHasNest(true);
->>>>>>> 037142328baf54227b7cfe0568fdf4c442ab63ca
 		nests.add(cellArray[columns/2][rows/2]);
 		//再描画
 		repaint();
