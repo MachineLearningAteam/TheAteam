@@ -35,8 +35,9 @@ public class AntsControlPanel {
 	private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
-	private JRadioButton foodRequiredAll = new JRadioButton("All");
-	private JRadioButton foodRequiredOne = new JRadioButton("One");
+	//Allのみにする.
+	//private JRadioButton foodRequiredAll = new JRadioButton("All");
+	//private JRadioButton foodRequiredOne = new JRadioButton("One");
 
 	private Timer stepTimer = new Timer(0, new ActionListener(){
 		public void actionPerformed(ActionEvent e){
@@ -195,6 +196,9 @@ public class AntsControlPanel {
 		foodRequiredPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 
+		//AllかOneかを選ぶところ
+		//Allのみにするので削除する.
+		/*
 		foodRequiredAll.setMinimumSize(controlDimension);
 		foodRequiredAll.setMaximumSize(controlDimension);
 		foodRequiredAll.setPreferredSize(controlDimension);
@@ -226,7 +230,7 @@ public class AntsControlPanel {
 
 
 		foodRequiredOne.setSelected(true);
-		
+		*/
 		
 		JLabel patternLabel = new JLabel("Pattern:");
 		patternLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
