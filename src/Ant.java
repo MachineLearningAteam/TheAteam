@@ -16,9 +16,6 @@ public class Ant {
 	public static double dropoffRate = .9;
 	//ある確率で移動先のセルの選択の基準が変わってるっぽい
 	public static double bestCellNext = 0.5;
-	//Food NeedでAllが選択されているかどうか.
-	//常にAllが選択されている状態にする.
-	//public static boolean allFoodRequired = false;
 	//その蟻がいるセルの行番号列番号
 	private int x;
 	private int y;
@@ -52,22 +49,10 @@ public class Ant {
 		if(world[x][y].isGoal()){
 			//自分が見つけた食べ物セルに現在地のセルを追加する.
 			foodFound.add(world[x][y]);
-			//Food NeedでAllが選択されている場合
-			//if(Ant.allFoodRequired){
-				//全ての食べ物を見つけていたら食べ物の記憶を消去する.
-				if(foodFound.size() >= ants.getFood().size()){
-					foodFound.clear();
-				}
-			//}
-			//Food NeedでOneが選択されている場合(Oneは削除する予定)
-			//else{
-				//帰還モードに入る.(ここを帰還モードに入らないようにする.)
-				/*
-				steps = 0;
-				returnToNest = true;
-				return;
-				*/
-			//}
+			//全ての食べ物を見つけていたら食べ物の記憶を消去する.
+			if(foodFound.size() >= ants.getFood().size()){
+				foodFound.clear();
+			}
 		}
 		//今までに調べた隣接セルの中で最も強い食べ物フェロモン
 		double maxFoodSoFar = 0;

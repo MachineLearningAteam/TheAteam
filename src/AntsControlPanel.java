@@ -35,10 +35,6 @@ public class AntsControlPanel {
 	private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
-	//Allのみにする.
-	//private JRadioButton foodRequiredAll = new JRadioButton("All");
-	//private JRadioButton foodRequiredOne = new JRadioButton("One");
-
 	private Timer stepTimer = new Timer(0, new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			step();
@@ -195,43 +191,6 @@ public class AntsControlPanel {
 		foodRequiredPanel.setBorder(BorderFactory.createTitledBorder("Food Needed"));
 		foodRequiredPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-
-		//AllかOneかを選ぶところ
-		//Allのみにするので削除する.
-		/*
-		foodRequiredAll.setMinimumSize(controlDimension);
-		foodRequiredAll.setMaximumSize(controlDimension);
-		foodRequiredAll.setPreferredSize(controlDimension);
-		foodRequiredAll.setFocusable(false);
-		foodRequiredAll.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Ant.allFoodRequired = true;
-				advancedPanel.environmentChanged();
-			}
-
-		});
-
-		foodRequiredOne.setFocusable(false);
-		foodRequiredOne.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Ant.allFoodRequired = false;
-				advancedPanel.environmentChanged();
-			}
-		});
-
-		ButtonGroup foodRequiredGroup = new ButtonGroup();
-		foodRequiredGroup.add(foodRequiredAll);
-		foodRequiredGroup.add(foodRequiredOne);
-
-		foodRequiredPanel.add(foodRequiredAll);
-		foodRequiredPanel.add(foodRequiredOne);
-
-
-		foodRequiredOne.setSelected(true);
-		*/
-		
 		JLabel patternLabel = new JLabel("Pattern:");
 		patternLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
