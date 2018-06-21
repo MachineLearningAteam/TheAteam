@@ -52,6 +52,8 @@ public class Ant {
 			//全ての食べ物を見つけていたら食べ物の記憶を消去する.
 			if(foodFound.size() >= ants.getFood().size()){
 				foodFound.clear();
+				//ただし最後に見つけた食べ物だけは記憶に残しておく.二重に食べ物を得ることを防ぐ.
+				foodFound.add(world[x][y]);
 			}
 		}
 		//今までに調べた隣接セルの中で最も強い食べ物フェロモン
