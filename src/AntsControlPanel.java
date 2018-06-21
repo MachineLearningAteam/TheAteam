@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -82,6 +83,8 @@ public class AntsControlPanel {
 		JLabel antsLabel = new JLabel("Ant Count:");
 		antsLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
+		//ここをテキスト入力に変える.
+		/*
 		final JSlider antsSlider = new JSlider();
 		antsSlider.setMinimumSize(controlDimension);
 		antsSlider.setMaximumSize(controlDimension);
@@ -99,6 +102,18 @@ public class AntsControlPanel {
 
 		});
 		antsSlider.setValue(100);
+		*/
+		//警備員の人数を入力するテキストボックス
+		final JTextField antsTextField = new JTextField("10");
+		antsTextField.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//テキストが変更された時に蟻の数を変更する.
+				ants.setMaxAnts(Integer.parseInt(antsTextField.getText()));
+			}
+		});
+		
 		
 		JPanel blockPanel = new JPanel();
 		blockPanel.setLayout(new BoxLayout(blockPanel, BoxLayout.Y_AXIS));
@@ -257,7 +272,8 @@ public class AntsControlPanel {
 		panel.add(speedSlider);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
-		panel.add(antsSlider);
+		//panel.add(antsSlider);
+		panel.add(antsTextField);
 		panel.add(Box.createGlue());
 		panel.add(blockPanel);
 		panel.add(Box.createGlue());
