@@ -83,36 +83,19 @@ public class AntsControlPanel {
 		JLabel antsLabel = new JLabel("Ant Count:");
 		antsLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-		//ここをテキスト入力に変える.
-		/*
-		final JSlider antsSlider = new JSlider();
-		antsSlider.setMinimumSize(controlDimension);
-		antsSlider.setMaximumSize(controlDimension);
-		antsSlider.setPreferredSize(controlDimension);
-		antsSlider.setMinimum(1);
-		antsSlider.setMaximum(200);
-		antsSlider.setMajorTickSpacing(100);
-		antsSlider.addChangeListener(new ChangeListener(){
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				ants.setMaxAnts(antsSlider.getValue());
-				ants.repaint();
-			}
-
-		});
-		antsSlider.setValue(100);
-		*/
 		//警備員の人数を入力するテキストボックス
-		final JTextField antsTextField = new JTextField("10");
+		final JTextField antsTextField = new JTextField("1");
+		//テキストボックスでenterが押された時の動作
 		antsTextField.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//テキストが変更された時に蟻の数を変更する.
+				//警備員の人数を変更する.
 				ants.setMaxAnts(Integer.parseInt(antsTextField.getText()));
 			}
 		});
+		//初期値は1
+		ants.setMaxAnts(1);
 		
 		
 		JPanel blockPanel = new JPanel();
@@ -272,7 +255,6 @@ public class AntsControlPanel {
 		panel.add(speedSlider);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
-		//panel.add(antsSlider);
 		panel.add(antsTextField);
 		panel.add(Box.createGlue());
 		panel.add(blockPanel);
