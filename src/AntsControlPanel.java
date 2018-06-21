@@ -31,12 +31,10 @@ public class AntsControlPanel {
 	private JButton timerButton = new JButton("\u25BA");
 	private JSlider speedSlider;
 	private JComboBox patternComboBox;
+	//シミュレーション領域の大きさを設定するコンボボックス
 	private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
-	private JRadioButton foodRequiredAll = new JRadioButton("All");
-	private JRadioButton foodRequiredOne = new JRadioButton("One");
-
 	private Timer stepTimer = new Timer(0, new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			step();
@@ -193,40 +191,6 @@ public class AntsControlPanel {
 		foodRequiredPanel.setBorder(BorderFactory.createTitledBorder("Food Needed"));
 		foodRequiredPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-
-		foodRequiredAll.setMinimumSize(controlDimension);
-		foodRequiredAll.setMaximumSize(controlDimension);
-		foodRequiredAll.setPreferredSize(controlDimension);
-		foodRequiredAll.setFocusable(false);
-		foodRequiredAll.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Ant.allFoodRequired = true;
-				advancedPanel.environmentChanged();
-			}
-
-		});
-
-		foodRequiredOne.setFocusable(false);
-		foodRequiredOne.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Ant.allFoodRequired = false;
-				advancedPanel.environmentChanged();
-			}
-		});
-
-		ButtonGroup foodRequiredGroup = new ButtonGroup();
-		foodRequiredGroup.add(foodRequiredAll);
-		foodRequiredGroup.add(foodRequiredOne);
-
-		foodRequiredPanel.add(foodRequiredAll);
-		foodRequiredPanel.add(foodRequiredOne);
-
-
-		foodRequiredOne.setSelected(true);
-		
-		
 		JLabel patternLabel = new JLabel("Pattern:");
 		patternLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
@@ -253,7 +217,7 @@ public class AntsControlPanel {
 		patternComboBox.setSelectedIndex(-1);
 
 		sizeComboBox.addItemListener(new ItemListener(){
-
+			//シミュレーション領域の大きさを変更する関数を呼び出す.
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
 				if(sizeComboBox.getSelectedItem().equals("10")){
