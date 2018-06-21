@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+
 /**
  * Class for displaying and updating an ant colony simulation.
  * Another class should be used to control the simulation
@@ -196,14 +197,24 @@ public class Ants extends JPanel{
 		killAllCells();
 	}
 
+
 	public void setGridSize(int columns, int rows){
 		this.columns = columns;
 		this.rows = rows;
 		cellArray = new Cell[columns][rows];
 		killAllCells();
 		ants.clear();
+		int[][] feald;
+		feald = new int[100][100];
+		feald = imagefileloat;
+		for(int i=0;i<100;i++){
+			for(int j=0;j<100;j++){
+				if (feald)
+				cellArray[i][j].setIsObstacle(true);
+			}
+		}
 
-		cellArray[columns/2][rows/2].setHasNest(true);
+		//cellArray[columns/2][rows/2].setHasNest(true);
 		nests.add(cellArray[columns/2][rows/2]);
 
 		repaint();
