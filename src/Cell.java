@@ -15,6 +15,8 @@ public class Cell {
 	public Map<Cell/*食べ物セル*/, Double/*その食べ物セルのフェロモンが自分のセルにどれくらい届いているか*/> foodPheromoneLevelMap = new HashMap<Cell, Double>();
 	//そのセルに食べ物があるかどうか
 	private boolean isGoal = false;
+	//このセルが食べ物セルであった場合の,警備員が自転車整理にかかる時間
+	private int waitTime;
 	//そのセルの行番号列番号
 	int c;
 	int r;
@@ -26,8 +28,9 @@ public class Cell {
 	}
 
 	//そのセルに食べ物があるかどうかを設定する.
-	public void setIsGoal(boolean isGoal){
+	public void setIsGoal(boolean isGoal, int waitTime/*この自転車置き場の取り締まりにかかる時間*/){
 		this.isGoal = isGoal;
+		this.waitTime = waitTime;
 	}
 	
 	//状態遷移関数

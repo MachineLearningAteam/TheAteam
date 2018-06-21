@@ -123,7 +123,7 @@ public class Ants extends JPanel{
 					return;
 				}
 				//クリックされたセルの初期化(そのセルに設定されていた食べ物,巣,障害物を削除する.)
-				cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false);
+				cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false, 0);
 				food.remove(cellArray[clickedCellColumn][clickedCellRow]);
 				cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 				cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
@@ -134,7 +134,7 @@ public class Ants extends JPanel{
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
 					}
 					else if(Tile.GOAL.equals(tile)){
-						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true);
+						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true, 100);
 						food.add(cellArray[clickedCellColumn][clickedCellRow]);
 					}
 					else if(Tile.NEST.equals(tile)){
@@ -167,7 +167,7 @@ public class Ants extends JPanel{
 				//ドラッグしながらあるセルから別のセルにマウスが移った時.
 				if(clickedCellColumn != previousColumn || clickedCellRow != previousRow){
 					//マウスの移動先のセルの初期化(そのセルに設定されていた食べ物,巣,障害物を削除する.)
-					cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false);
+					cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false, 0);
 					food.remove(cellArray[clickedCellColumn][clickedCellRow]);
 					cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 					cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
@@ -177,7 +177,7 @@ public class Ants extends JPanel{
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
 					}
 					else if(Tile.GOAL.equals(tile)){
-						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true);
+						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true, 100);
 						food.add(cellArray[clickedCellColumn][clickedCellRow]);
 					}
 					else if(Tile.NEST.equals(tile)){
