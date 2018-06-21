@@ -198,6 +198,12 @@ public class Ants extends JPanel{
 		setBackground(Color.WHITE);
 		//シミュレーション領域を巣も食べ物もない状態にする.
 		killAllCells();
+		//ここにマップの初期状態を記述する.
+		//シミュレーション領域の中央に巣を配置する.
+		cellArray[columns/2][rows/2].setHasNest(true);
+		nests.add(cellArray[columns/2][rows/2]);
+		//再描画
+		repaint();
 	}
 
 	//シミュレーション領域の大きさを変更したときに呼び出される.環境を初期化する.
