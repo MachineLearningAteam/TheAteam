@@ -36,13 +36,13 @@ public class Ants extends JPanel{
 	//Place tileで選択されているやつ
 	private Tile tile = Tile.GOAL;
 
-	//シミュレーション領域内にセルが25*25個ある.
-	int rows = 25;
-	int columns = 25;
+	//シミュレーション領域内にセルが100*100個ある.
+	int rows = 100;
+	int columns = 100;
 	//セルの2次元配列
 	Cell [][] cellArray = new Cell[columns][rows];
 
-	private int maxAnts = 100;
+	private int maxAnts = 1;
 	//蟻の配列
 	private List<Ant/*Ant.javaで定義されているありのクラス*/> ants = new ArrayList<Ant>();
 
@@ -201,6 +201,8 @@ public class Ants extends JPanel{
 	}
 
 	//シミュレーション領域の大きさを変更したときに呼び出される.環境を初期化する.
+	//このメソッドは不要
+	/*
 	public void setGridSize(int columns, int rows){
 		this.columns = columns;
 		this.rows = rows;
@@ -215,8 +217,9 @@ public class Ants extends JPanel{
 		//再描画
 		repaint();
 	}
+	*/
 
-	//プログラム開始時とシミュレーション領域の大きさを変更した時に呼び出される.シミュレーション領域を巣も食べ物もない状態にする.
+	//プログラム開始時に呼び出される.シミュレーション領域を巣も食べ物もない状態にする.
 	public void killAllCells(){
 		//巣を全て消去する.
 		nests.clear();

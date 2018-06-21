@@ -33,7 +33,7 @@ public class AntsControlPanel {
 	private JSlider speedSlider;
 	private JComboBox patternComboBox;
 	//シミュレーション領域の大きさを設定するコンボボックス
-	private JComboBox sizeComboBox;
+	//private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
 	private Timer stepTimer = new Timer(0, new ActionListener(){
@@ -154,6 +154,7 @@ public class AntsControlPanel {
 		JLabel sizeLabel = new JLabel("Size:");
 		sizeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
+		/*
 		sizeComboBox = new JComboBox();
 		sizeComboBox.setFocusable(false);
 		sizeComboBox.setMinimumSize(controlDimension);
@@ -163,6 +164,7 @@ public class AntsControlPanel {
 		sizeComboBox.addItem("25");
 		sizeComboBox.addItem("50");
 		sizeComboBox.addItem("100");
+		*/
 
 		JLabel speedLabel = new JLabel("Speed:");
 		speedLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -214,6 +216,7 @@ public class AntsControlPanel {
 
 		patternComboBox.setSelectedIndex(-1);
 
+		/*
 		sizeComboBox.addItemListener(new ItemListener(){
 			//シミュレーション領域の大きさを変更する関数を呼び出す.
 			@Override
@@ -234,6 +237,7 @@ public class AntsControlPanel {
 		});
 
 		sizeComboBox.setSelectedItem("50");
+		*/
 		
 		final JCheckBox showAdvanced = new JCheckBox("Advanced");
 		showAdvanced.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -261,7 +265,7 @@ public class AntsControlPanel {
 		panel.add(Box.createGlue());
 		
 		panel.add(sizeLabel);
-		panel.add(sizeComboBox);
+		//panel.add(sizeComboBox);
 		panel.add(Box.createGlue());
 		panel.add(foodRequiredPanel);
 		panel.add(Box.createGlue());
