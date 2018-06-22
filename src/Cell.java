@@ -92,4 +92,9 @@ public class Cell {
 	public void setHasNest(boolean hasNest) {
 		this.hasNest = hasNest;
 	}	
+
+	//警備員が取り締まりに要する時間
+	public int getWaitTime() {
+		return waitTime;
+	}
 }

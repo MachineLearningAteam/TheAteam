@@ -58,7 +58,7 @@ public class Ants extends JPanel{
 	final JInternalFrame aboutFrame = new JInternalFrame("About", false, true);
 	//最初にシミュレーション領域の上部に表示される簡単な説明書き
 	final JInternalFrame messageFrame = new JInternalFrame("Getting Started", false, true);
-	
+
 	//コンストラクタ
 	public Ants(){
 

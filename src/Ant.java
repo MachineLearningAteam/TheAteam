@@ -26,6 +26,9 @@ public class Ant {
 	//その蟻がいるシミュレーション領域
 	private Ants ants;
 
+	//自転車整理にかかる残り時間
+	private int waitTime = 0;
+
 	//コンストラクタ
 	public Ant(Cell startCell/*初期位置*/, Cell[][] world/*その蟻がいる世界*/, Ants ants/*その蟻がいるシミュレーション領域*/){
 		this.x = startCell.c;
@@ -36,6 +39,12 @@ public class Ant {
 
 	//状態遷移関数
 	public void step(){
+		//自転車整理中は動かない
+		if(waitTime > 0)
+		{
+			waitTime--;
+			return;
+		}
 		//0以上1より小さい乱数
 		double chanceToTakeBest = Math.random();
 		
@@ -144,6 +153,8 @@ public class Ant {
 
 				x = bestCellSoFar.c;
 				y = bestCellSoFar.r;
+				//移動先のセルに食べ物がある場合自転車整理を開始する.
+				if(world[x][y].isGoal())waitTime = world[x][y].getWaitTime();
 			}
 		}	
 		//確率1-Ant.bestCellNextでこっちを実行する.
@@ -160,6 +171,8 @@ public class Ant {
 
 						x = neighbor.c;
 						y = neighbor.r;
+						//移動先のセルに食べ物がある場合自転車整理を開始する.
+						if(world[x][y].isGoal())waitTime = world[x][y].getWaitTime();
 						break;
 					}
 				}
@@ -176,6 +189,8 @@ public class Ant {
 
 							x = neighbor.c;
 							y = neighbor.r;
+							//移動先のセルに食べ物がある場合自転車整理を開始する.
+							if(world[x][y].isGoal())waitTime = world[x][y].getWaitTime();
 							return;
 						}
 					}
