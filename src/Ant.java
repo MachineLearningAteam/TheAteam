@@ -153,8 +153,8 @@ public class Ant {
 
 				x = bestCellSoFar.c;
 				y = bestCellSoFar.r;
-				//移動先のセルに食べ物がある場合自転車整理を開始する.
-				if(world[x][y].isGoal())waitTime = world[x][y].getWaitTime();
+				//移動先のセルで自転車が乱れている場合自転車整理を開始する.
+				if(world[x][y].isGoal() && world[x][y].hasFood())waitTime = world[x][y].getWaitTime();
 			}
 		}	
 		//確率1-Ant.bestCellNextでこっちを実行する.
@@ -171,8 +171,8 @@ public class Ant {
 
 						x = neighbor.c;
 						y = neighbor.r;
-						//移動先のセルに食べ物がある場合自転車整理を開始する.
-						if(world[x][y].isGoal())waitTime = world[x][y].getWaitTime();
+						//移動先のセルで自転車が乱れている場合自転車整理を開始する.
+						if(world[x][y].isGoal() && world[x][y].hasFood())waitTime = world[x][y].getWaitTime();
 						break;
 					}
 				}
@@ -189,8 +189,8 @@ public class Ant {
 
 							x = neighbor.c;
 							y = neighbor.r;
-							//移動先のセルに食べ物がある場合自転車整理を開始する.
-							if(world[x][y].isGoal())waitTime = world[x][y].getWaitTime();
+							//移動先のセルで自転車が乱れている場合自転車整理を開始する.
+							if(world[x][y].isGoal() && world[x][y].hasFood())waitTime = world[x][y].getWaitTime();
 							return;
 						}
 					}

@@ -17,6 +17,10 @@ public class Cell {
 	private boolean isGoal = false;
 	//このセルが食べ物セルであった場合の,警備員が自転車整理にかかる時間
 	private int waitTime;
+	//このセルが食べ物セルであった場合の,食べ物が発生する確率
+	private double foodProbability = 0.1;
+	//このセルが食べ物セルであった場合,食べ物が発生しているかどうか
+	private boolean hasFood = false;
 	//そのセルの行番号列番号
 	int c;
 	int r;
@@ -50,6 +54,8 @@ public class Cell {
 			//食べ物フェロモンの強さを更新する.
 			foodPheromoneLevelMap.put(food, foodPheromoneLevel);
 		}
+		//食べ物セルは一定の確率で食べ物が発生する.
+		if(isGoal && !hasFood && Math.random() < foodProbability)hasFood = true;
 	}
 
 	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
@@ -93,8 +99,13 @@ public class Cell {
 		this.hasNest = hasNest;
 	}	
 
-	//警備員が取り締まりに要する時間
+	//その食べ物セルの自転車が乱れた時に警備員が整理に要する時間
 	public int getWaitTime() {
 		return waitTime;
+	}
+
+	//その食べ物セルの自転車が乱れているかどうか
+	public boolean hasFood() {
+		return hasFood;
 	}
 }
