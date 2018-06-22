@@ -43,6 +43,8 @@ public class Ant {
 		if(waitTime > 0)
 		{
 			waitTime--;
+			//自転車整理完了
+			if(waitTime == 0)world[x][y].endSet();
 			return;
 		}
 		//0以上1より小さい乱数
@@ -154,7 +156,11 @@ public class Ant {
 				x = bestCellSoFar.c;
 				y = bestCellSoFar.r;
 				//移動先のセルで自転車が乱れている場合自転車整理を開始する.
-				if(world[x][y].isGoal() && world[x][y].hasFood())waitTime = world[x][y].getWaitTime();
+				if(world[x][y].isGoal() && world[x][y].hasFood())
+				{
+					waitTime = world[x][y].getWaitTime();
+					world[x][y].beginSet();
+				}
 			}
 		}	
 		//確率1-Ant.bestCellNextでこっちを実行する.
@@ -172,7 +178,11 @@ public class Ant {
 						x = neighbor.c;
 						y = neighbor.r;
 						//移動先のセルで自転車が乱れている場合自転車整理を開始する.
-						if(world[x][y].isGoal() && world[x][y].hasFood())waitTime = world[x][y].getWaitTime();
+						if(world[x][y].isGoal() && world[x][y].hasFood())
+						{
+							waitTime = world[x][y].getWaitTime();
+							world[x][y].beginSet();
+						}
 						break;
 					}
 				}
@@ -190,7 +200,11 @@ public class Ant {
 							x = neighbor.c;
 							y = neighbor.r;
 							//移動先のセルで自転車が乱れている場合自転車整理を開始する.
-							if(world[x][y].isGoal() && world[x][y].hasFood())waitTime = world[x][y].getWaitTime();
+							if(world[x][y].isGoal() && world[x][y].hasFood())
+							{
+								waitTime = world[x][y].getWaitTime();
+								world[x][y].beginSet();
+							}
 							return;
 						}
 					}

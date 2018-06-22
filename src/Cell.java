@@ -21,6 +21,8 @@ public class Cell {
 	private double foodProbability = 0.1;
 	//このセルが食べ物セルであった場合,食べ物が発生しているかどうか
 	private boolean hasFood = false;
+	//このセルが食べ物セルであった場合,警備員がこのセルの自転車を整理中であるかどうか
+	private boolean isSet = false;
 	//そのセルの行番号列番号
 	int c;
 	int r;
@@ -55,7 +57,7 @@ public class Cell {
 			foodPheromoneLevelMap.put(food, foodPheromoneLevel);
 		}
 		//食べ物セルは一定の確率で食べ物が発生する.
-		if(isGoal && !hasFood && Math.random() < foodProbability)hasFood = true;
+		if(isGoal && !hasFood && !isSet && Math.random() < foodProbability)hasFood = true;
 	}
 
 	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
@@ -107,5 +109,16 @@ public class Cell {
 	//その食べ物セルの自転車が乱れているかどうか
 	public boolean hasFood() {
 		return hasFood;
+	}
+
+	//警備員がその食べ物セルの自転車整理を開始する.
+	public void beginSet() {
+		isSet = true;
+		hasFood = false;
+	}
+
+	//警備員がその食べ物セルの自転車整理を完了する.
+	public void endSet() {
+		isSet = false;
 	}
 }
