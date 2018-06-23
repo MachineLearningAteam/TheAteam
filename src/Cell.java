@@ -115,6 +115,11 @@ public class Cell {
 		return hasFood;
 	}
 
+	//その食べ物セルが自転車整理されている最中であるかどうか
+	public boolean isSet() {
+		return isSet;
+	}
+
 	//警備員がその食べ物セルの自転車整理を開始する.
 	public void beginSet() {
 		System.out.println("セル" + c + "," + r + "整理します.");

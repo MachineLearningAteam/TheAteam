@@ -426,6 +426,8 @@ public class Ants extends JPanel{
 	public void setMaxAnts(int maxAnts) {
 		this.maxAnts = maxAnts;
 		while(ants.size() > maxAnts){
+			//削除する警備員が自転車整理中である場合,自転車整理を終える.
+			if(cellArray[ants.get(0).getCol()][ants.get(0).getRow()].isSet())cellArray[ants.get(0).getCol()][ants.get(0).getRow()].endSet();
 			ants.remove(0);
 		}
 	}
