@@ -30,7 +30,7 @@ public class AntsControlPanel {
 	private Ants ants;
 	private JPanel panel = new JPanel();
 	private JButton timerButton = new JButton("\u25BA");
-	private JSlider speedSlider;
+	//private JSlider speedSlider;
 	private JComboBox patternComboBox;
 	//シミュレーション領域の大きさを設定するコンボボックス
 	//private JComboBox sizeComboBox;
@@ -169,6 +169,7 @@ public class AntsControlPanel {
 		JLabel speedLabel = new JLabel("Speed:");
 		speedLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
+		/*
 		speedSlider = new JSlider();
 		speedSlider.setMinimumSize(controlDimension);
 		speedSlider.setMaximumSize(controlDimension);
@@ -184,6 +185,7 @@ public class AntsControlPanel {
 
 		});
 		speedSlider.setValue(2100);
+		*/
 		
 		
 		JPanel foodRequiredPanel = new JPanel();
@@ -256,7 +258,7 @@ public class AntsControlPanel {
 		panel.add(timerButton);
 		panel.add(stepButton);
 		panel.add(speedLabel);
-		panel.add(speedSlider);
+		//panel.add(speedSlider);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
 		panel.add(antsTextField);
