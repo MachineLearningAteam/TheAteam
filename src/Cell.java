@@ -57,7 +57,11 @@ public class Cell {
 			foodPheromoneLevelMap.put(food, foodPheromoneLevel);
 		}
 		//食べ物セルは一定の確率で食べ物が発生する.
-		if(isGoal && !hasFood && !isSet && Math.random() < foodProbability)hasFood = true;
+		if(isGoal && !hasFood && !isSet && Math.random() < foodProbability)
+		{
+			System.out.println("セル" + c + "," + r + "乱れました.");
+			hasFood = true;
+		}
 	}
 
 	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
@@ -113,12 +117,14 @@ public class Cell {
 
 	//警備員がその食べ物セルの自転車整理を開始する.
 	public void beginSet() {
+		System.out.println("セル" + c + "," + r + "整理します.");
 		isSet = true;
 		hasFood = false;
 	}
 
 	//警備員がその食べ物セルの自転車整理を完了する.
 	public void endSet() {
+		System.out.println("セル" + c + "," + r + "整理終わりました.");
 		isSet = false;
 	}
 }
