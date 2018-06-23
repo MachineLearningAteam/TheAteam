@@ -8,6 +8,7 @@ public class Imagefileload{
         int[][] feald;
         feald = new int[100][100];
         String string = "map1.bmp";
+        //System.out.println("load_start");
         try {
 		    BufferedImage img = ImageIO.read(new File(string));
       //  FileInputStream fis = new FileInputStream("map1.bmp");
@@ -18,15 +19,16 @@ public class Imagefileload{
                 for(int j=0;j<100;j++){
                     int data =img.getRGB(j, i);
                     if (data==-1){
-                        //System.out.print("1"); 
-                        feald[i][j]  =1;
+                        System.out.print("1"); 
+                        feald[j][i]  =1;
                     }
                     else{
-                //System.out.print("0"); 
-                        feald[i][j]  =0;
+                        System.out.print("0"); 
+                        feald[j][i]  =0;
                     }
                 }
-            System.out.println();
+                System.out.println("");
+        
             }
         } catch ( IOException e) { 
         
@@ -35,6 +37,7 @@ public class Imagefileload{
        // System.exit()
         }
        // fis.close();
+  
 	    return feald;
     }
 }

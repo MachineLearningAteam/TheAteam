@@ -198,9 +198,20 @@ public class Ants extends JPanel{
 		//背景色を白にする.
 		setBackground(Color.WHITE);
 		//シミュレーション領域を巣も食べ物もない状態にする.
+		
 		killAllCells();
 		//ここにマップの初期状態を記述する.
 		//シミュレーション領域の中央に巣を配置する.
+		int[][] feald;
+		feald = new int[100][100];
+		Imagefileload feald_data = new Imagefileload();
+		feald = feald_data.get_feald();
+		for(int i=0;i<100;i++){
+			for(int j=0;j<100;j++){
+				if (feald[i][j]==1)
+					cellArray[i][j].setIsObstacle(true);
+			}
+		}
 		cellArray[columns/2][rows/2].setHasNest(true);
 		nests.add(cellArray[columns/2][rows/2]);
 		//再描画
