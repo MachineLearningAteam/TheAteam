@@ -30,10 +30,7 @@ public class AntsControlPanel {
 	private Ants ants;
 	private JPanel panel = new JPanel();
 	private JButton timerButton = new JButton("\u25BA");
-	//private JSlider speedSlider;
 	private JComboBox patternComboBox;
-	//シミュレーション領域の大きさを設定するコンボボックス
-	//private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
 	private Timer stepTimer = new Timer(0, new ActionListener(){
@@ -150,44 +147,9 @@ public class AntsControlPanel {
 		
 		blockPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
-		
-		//JLabel sizeLabel = new JLabel("Size:");
-		//sizeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-
-		/*
-		sizeComboBox = new JComboBox();
-		sizeComboBox.setFocusable(false);
-		sizeComboBox.setMinimumSize(controlDimension);
-		sizeComboBox.setMaximumSize(controlDimension);
-		sizeComboBox.setPreferredSize(controlDimension);
-		//sizeComboBox.addItem("10 X 10");
-		sizeComboBox.addItem("25");
-		sizeComboBox.addItem("50");
-		sizeComboBox.addItem("100");
-		*/
-
 		JLabel speedLabel = new JLabel("Speed:");
 		speedLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-		/*
-		speedSlider = new JSlider();
-		speedSlider.setMinimumSize(controlDimension);
-		speedSlider.setMaximumSize(controlDimension);
-		speedSlider.setPreferredSize(controlDimension);
-		speedSlider.setMinimum(1200);
-		speedSlider.setMaximum(2100);
-		speedSlider.addChangeListener(new ChangeListener(){
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				stepTimer.setDelay(2100 - speedSlider.getValue());
-			}
-
-		});
-		speedSlider.setValue(2100);
-		*/
-		
-		
 		JPanel foodRequiredPanel = new JPanel();
 		foodRequiredPanel.setLayout(new BoxLayout(foodRequiredPanel, BoxLayout.Y_AXIS));
 		foodRequiredPanel.setBorder(BorderFactory.createTitledBorder("Food Needed"));
@@ -218,29 +180,6 @@ public class AntsControlPanel {
 
 		patternComboBox.setSelectedIndex(-1);
 
-		/*
-		sizeComboBox.addItemListener(new ItemListener(){
-			//シミュレーション領域の大きさを変更する関数を呼び出す.
-			@Override
-			public void itemStateChanged(ItemEvent arg0) {
-				if(sizeComboBox.getSelectedItem().equals("10")){
-					AntsControlPanel.this.ants.setGridSize(10, 10);
-				}
-				else if(sizeComboBox.getSelectedItem().equals("25")){
-					AntsControlPanel.this.ants.setGridSize(25, 25);
-				}
-				else if(sizeComboBox.getSelectedItem().equals("50")){
-					AntsControlPanel.this.ants.setGridSize(50, 50);
-				}
-				else if(sizeComboBox.getSelectedItem().equals("100")){
-					AntsControlPanel.this.ants.setGridSize(100, 100);
-				}	
-			}
-		});
-
-		sizeComboBox.setSelectedItem("50");
-		*/
-		
 		final JCheckBox showAdvanced = new JCheckBox("Advanced");
 		showAdvanced.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		showAdvanced.addActionListener(new ActionListener(){
@@ -258,16 +197,12 @@ public class AntsControlPanel {
 		panel.add(timerButton);
 		panel.add(stepButton);
 		panel.add(speedLabel);
-		//panel.add(speedSlider);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
 		panel.add(antsTextField);
 		panel.add(Box.createGlue());
 		panel.add(blockPanel);
 		panel.add(Box.createGlue());
-		
-		//panel.add(sizeLabel);
-		//panel.add(sizeComboBox);
 		panel.add(Box.createGlue());
 		panel.add(foodRequiredPanel);
 		panel.add(Box.createGlue());
