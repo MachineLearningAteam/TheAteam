@@ -145,17 +145,11 @@ public class AntsControlPanel {
 		blockPanel.add(clear);
 		
 		blockPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-		
-		JLabel speedLabel = new JLabel("Speed:");
-		speedLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 		JPanel foodRequiredPanel = new JPanel();
 		foodRequiredPanel.setLayout(new BoxLayout(foodRequiredPanel, BoxLayout.Y_AXIS));
 		foodRequiredPanel.setBorder(BorderFactory.createTitledBorder("Food Needed"));
 		foodRequiredPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-
-		JLabel patternLabel = new JLabel("Pattern:");
-		patternLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 		final JCheckBox showAdvanced = new JCheckBox("Advanced");
 		showAdvanced.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -173,7 +167,6 @@ public class AntsControlPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(timerButton);
 		panel.add(stepButton);
-		panel.add(speedLabel);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
 		panel.add(antsTextField);
@@ -183,7 +176,6 @@ public class AntsControlPanel {
 		panel.add(Box.createGlue());
 		panel.add(foodRequiredPanel);
 		panel.add(Box.createGlue());
-		panel.add(patternLabel);
 		panel.add(Box.createGlue());
 		panel.add(showAdvanced);
 	}
