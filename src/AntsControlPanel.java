@@ -30,7 +30,6 @@ public class AntsControlPanel {
 	private Ants ants;
 	private JPanel panel = new JPanel();
 	private JButton timerButton = new JButton("\u25BA");
-	private JComboBox patternComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
 	private Timer stepTimer = new Timer(0, new ActionListener(){
@@ -158,28 +157,6 @@ public class AntsControlPanel {
 		JLabel patternLabel = new JLabel("Pattern:");
 		patternLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-		patternComboBox = new JComboBox();
-		patternComboBox.setFocusable(false);
-		patternComboBox.setMinimumSize(controlDimension);
-		patternComboBox.setMaximumSize(controlDimension);
-		patternComboBox.setPreferredSize(controlDimension);
-
-		patternComboBox.addItem(Ants.Pattern.Clear);
-		patternComboBox.addItem(Ants.Pattern.Filled);
-		patternComboBox.addItem(Ants.Pattern.Random);
-		patternComboBox.addItemListener(new ItemListener(){
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(patternComboBox.getSelectedIndex() != -1){
-					ants.setPattern((Ants.Pattern) patternComboBox.getSelectedItem());
-					patternComboBox.setSelectedIndex(-1);
-				}
-				
-			}
-		});
-
-		patternComboBox.setSelectedIndex(-1);
-
 		final JCheckBox showAdvanced = new JCheckBox("Advanced");
 		showAdvanced.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		showAdvanced.addActionListener(new ActionListener(){
@@ -207,7 +184,6 @@ public class AntsControlPanel {
 		panel.add(foodRequiredPanel);
 		panel.add(Box.createGlue());
 		panel.add(patternLabel);
-		panel.add(patternComboBox);
 		panel.add(Box.createGlue());
 		panel.add(showAdvanced);
 	}

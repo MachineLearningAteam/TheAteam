@@ -207,39 +207,6 @@ public class Ants extends JPanel{
 		repaint();
 	}
 
-	//シミュレーション領域の大きさを変更したときに呼び出される.環境を初期化する.
-
-	//このメソッドは不要
-	/*
-
-	public void setGridSize(int columns, int rows){
-		this.columns = columns;
-		this.rows = rows;
-		cellArray = new Cell[columns][rows];
-		//シミュレーション領域を巣も食べ物もない状態にする.
-		killAllCells();
-		//蟻の配列を消去する.
-		ants.clear();
-		int[][] feald;
-		feald = new int[100][100];
-		Imagefileload feald_data = new Imagefileload();
-		feald = feald_data.get_feald();
-		for(int i=0;i<100;i++){
-			for(int j=0;j<100;j++){
-				if (feald[i][j]==1)
-					cellArray[i][j].setIsObstacle(true);
-			}
-		}
-
-		//cellArray[columns/2][rows/2].setHasNest(true);
-		//シミュレーション領域の中央に巣を配置する.
-		cellArray[columns/2][rows/2].setHasNest(true);
-		nests.add(cellArray[columns/2][rows/2]);
-		//再描画
-		repaint();
-	}
-	*/
-
 	//プログラム開始時に呼び出される.シミュレーション領域を巣も食べ物もない状態にする.
 	public void killAllCells(){
 		//巣を全て消去する.
@@ -255,36 +222,6 @@ public class Ants extends JPanel{
 		//advancedControlPanelに環境が変わったことを伝える.
 		if(advancedControlPanel != null){
 			advancedControlPanel.environmentChanged();
-		}
-		//再描画
-		repaint();
-	}
-
-	//Patternを指定した時に呼び出される.指定された方法でシミュレーション領域内に障害物を配置する.
-	public void setPattern(Pattern newPattern){
-		//シミュレーション領域を巣も食べ物もない状態にする.
-		killAllCells();
-		//PatternでFilledが選択された場合全てのセルを障害物にする.
-		if(newPattern.equals(Pattern.Filled)){
-			for(int column = 0; column < columns; column++){
-				for(int row = 0; row < rows; row++){
-					cellArray[column][row].setIsObstacle(true);
-				}
-			}
-		}
-		//PatternでRandomが選択された場合各セルを0.3の確率で障害物にする.
-		else if(newPattern.equals(Pattern.Random)){
-			for(int column = 0; column < columns; column++){
-				for(int row = 0; row < rows; row++){
-					if(Math.random() < .3){
-						cellArray[column][row].setIsObstacle(true);
-					}
-				}
-			}
-			//中央のセルに巣を配置する.
-			cellArray[columns/2][rows/2].setIsObstacle(false);
-			cellArray[columns/2][rows/2].setHasNest(true);
-			nests.add(cellArray[columns/2][rows/2]);
 		}
 		//再描画
 		repaint();
