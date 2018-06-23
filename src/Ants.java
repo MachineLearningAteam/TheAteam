@@ -37,13 +37,13 @@ public class Ants extends JPanel{
 	//Place tileで選択されているやつ
 	private Tile tile = Tile.GOAL;
 
-	//シミュレーション領域内にセルが25*25個ある.
-	int rows = 25;
-	int columns = 25;
+	//シミュレーション領域内にセルが100*100個ある.
+	int rows = 100;
+	int columns = 100;
 	//セルの2次元配列
 	Cell [][] cellArray = new Cell[columns][rows];
 
-	private int maxAnts = 100;
+	private int maxAnts = 1;
 	//蟻の配列
 	private List<Ant/*Ant.javaで定義されているありのクラス*/> ants = new ArrayList<Ant>();
 
@@ -59,7 +59,7 @@ public class Ants extends JPanel{
 	final JInternalFrame aboutFrame = new JInternalFrame("About", false, true);
 	//最初にシミュレーション領域の上部に表示される簡単な説明書き
 	final JInternalFrame messageFrame = new JInternalFrame("Getting Started", false, true);
-	
+
 	//コンストラクタ
 	public Ants(){
 
@@ -124,7 +124,7 @@ public class Ants extends JPanel{
 					return;
 				}
 				//クリックされたセルの初期化(そのセルに設定されていた食べ物,巣,障害物を削除する.)
-				cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false);
+				cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false, 0);
 				food.remove(cellArray[clickedCellColumn][clickedCellRow]);
 				cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 				cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
@@ -135,7 +135,7 @@ public class Ants extends JPanel{
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
 					}
 					else if(Tile.GOAL.equals(tile)){
-						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true);
+						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true, 100);
 						food.add(cellArray[clickedCellColumn][clickedCellRow]);
 					}
 					else if(Tile.NEST.equals(tile)){
@@ -168,7 +168,7 @@ public class Ants extends JPanel{
 				//ドラッグしながらあるセルから別のセルにマウスが移った時.
 				if(clickedCellColumn != previousColumn || clickedCellRow != previousRow){
 					//マウスの移動先のセルの初期化(そのセルに設定されていた食べ物,巣,障害物を削除する.)
-					cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false);
+					cellArray[clickedCellColumn][clickedCellRow].setIsGoal(false, 0);
 					food.remove(cellArray[clickedCellColumn][clickedCellRow]);
 					cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(false);
 					cellArray[clickedCellColumn][clickedCellRow].setHasNest(false);
@@ -178,7 +178,7 @@ public class Ants extends JPanel{
 						cellArray[clickedCellColumn][clickedCellRow].setIsObstacle(true);
 					}
 					else if(Tile.GOAL.equals(tile)){
-						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true);
+						cellArray[clickedCellColumn][clickedCellRow].setIsGoal(true, 100);
 						food.add(cellArray[clickedCellColumn][clickedCellRow]);
 					}
 					else if(Tile.NEST.equals(tile)){
@@ -199,9 +199,18 @@ public class Ants extends JPanel{
 		setBackground(Color.WHITE);
 		//シミュレーション領域を巣も食べ物もない状態にする.
 		killAllCells();
+		//ここにマップの初期状態を記述する.
+		//シミュレーション領域の中央に巣を配置する.
+		cellArray[columns/2][rows/2].setHasNest(true);
+		nests.add(cellArray[columns/2][rows/2]);
+		//再描画
+		repaint();
 	}
 
 	//シミュレーション領域の大きさを変更したときに呼び出される.環境を初期化する.
+
+	//このメソッドは不要
+	/*
 
 	public void setGridSize(int columns, int rows){
 		this.columns = columns;
@@ -229,8 +238,9 @@ public class Ants extends JPanel{
 		//再描画
 		repaint();
 	}
+	*/
 
-	//プログラム開始時とシミュレーション領域の大きさを変更した時に呼び出される.シミュレーション領域を巣も食べ物もない状態にする.
+	//プログラム開始時に呼び出される.シミュレーション領域を巣も食べ物もない状態にする.
 	public void killAllCells(){
 		//巣を全て消去する.
 		nests.clear();
@@ -431,6 +441,8 @@ public class Ants extends JPanel{
 	public void setMaxAnts(int maxAnts) {
 		this.maxAnts = maxAnts;
 		while(ants.size() > maxAnts){
+			//削除する警備員が自転車整理中である場合,自転車整理を終える.
+			if(cellArray[ants.get(0).getCol()][ants.get(0).getRow()].isSet())cellArray[ants.get(0).getCol()][ants.get(0).getRow()].endSet();
 			ants.remove(0);
 		}
 	}
