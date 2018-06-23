@@ -151,8 +151,8 @@ public class AntsControlPanel {
 		blockPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
 		
-		JLabel sizeLabel = new JLabel("Size:");
-		sizeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		//JLabel sizeLabel = new JLabel("Size:");
+		//sizeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 		/*
 		sizeComboBox = new JComboBox();
@@ -264,7 +264,7 @@ public class AntsControlPanel {
 		panel.add(blockPanel);
 		panel.add(Box.createGlue());
 		
-		panel.add(sizeLabel);
+		//panel.add(sizeLabel);
 		//panel.add(sizeComboBox);
 		panel.add(Box.createGlue());
 		panel.add(foodRequiredPanel);
