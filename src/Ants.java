@@ -208,12 +208,22 @@ public class Ants extends JPanel{
 		feald = feald_data.get_feald();
 		for(int i=0;i<100;i++){
 			for(int j=0;j<100;j++){
-				if (feald[i][j]==1)
-					cellArray[i][j].setIsObstacle(true);
+				if (feald[i][j]==1000){
+					cellArray[i][j].setIsObstacle(true);//壁
+
+				}else if (feald[i][j]==2000){
+					cellArray[i][j].setHasNest(true);	
+					nests.add(cellArray[i][j]);//巣
+
+				}else if (feald[i][j]>0){
+					System.out.println("Goal"); 
+					cellArray[i][j].setIsGoal(true,feald[i][j]);	
+				
+				}
 			}
 		}
-		cellArray[columns/2][rows/2].setHasNest(true);
-		nests.add(cellArray[columns/2][rows/2]);
+		
+		//nests.add(cellArray[columns/2][rows/2]);
 		//再描画
 		repaint();
 	}
