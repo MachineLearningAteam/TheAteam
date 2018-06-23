@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -32,7 +33,7 @@ public class AntsControlPanel {
 	private JSlider speedSlider;
 	private JComboBox patternComboBox;
 	//シミュレーション領域の大きさを設定するコンボボックス
-	private JComboBox sizeComboBox;
+	//private JComboBox sizeComboBox;
 	private final AdvancedControlPanel advancedPanel;
 	
 	private Timer stepTimer = new Timer(0, new ActionListener(){
@@ -82,23 +83,20 @@ public class AntsControlPanel {
 		JLabel antsLabel = new JLabel("Ant Count:");
 		antsLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-		final JSlider antsSlider = new JSlider();
-		antsSlider.setMinimumSize(controlDimension);
-		antsSlider.setMaximumSize(controlDimension);
-		antsSlider.setPreferredSize(controlDimension);
-		antsSlider.setMinimum(1);
-		antsSlider.setMaximum(200);
-		antsSlider.setMajorTickSpacing(100);
-		antsSlider.addChangeListener(new ChangeListener(){
+		//警備員の人数を入力するテキストボックス
+		final JTextField antsTextField = new JTextField("1");
+		//テキストボックスでenterが押された時の動作
+		antsTextField.addActionListener(new ActionListener(){
 
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				ants.setMaxAnts(antsSlider.getValue());
-				ants.repaint();
+			public void actionPerformed(ActionEvent e) {
+				//警備員の人数を変更する.
+				ants.setMaxAnts(Integer.parseInt(antsTextField.getText()));
 			}
-
 		});
-		antsSlider.setValue(100);
+		//初期値は1
+		ants.setMaxAnts(1);
+		
 		
 		JPanel blockPanel = new JPanel();
 		blockPanel.setLayout(new BoxLayout(blockPanel, BoxLayout.Y_AXIS));
@@ -153,9 +151,10 @@ public class AntsControlPanel {
 		blockPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
 		
-		JLabel sizeLabel = new JLabel("Size:");
-		sizeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		//JLabel sizeLabel = new JLabel("Size:");
+		//sizeLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
+		/*
 		sizeComboBox = new JComboBox();
 		sizeComboBox.setFocusable(false);
 		sizeComboBox.setMinimumSize(controlDimension);
@@ -165,6 +164,7 @@ public class AntsControlPanel {
 		sizeComboBox.addItem("25");
 		sizeComboBox.addItem("50");
 		sizeComboBox.addItem("100");
+		*/
 
 		JLabel speedLabel = new JLabel("Speed:");
 		speedLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -216,6 +216,7 @@ public class AntsControlPanel {
 
 		patternComboBox.setSelectedIndex(-1);
 
+		/*
 		sizeComboBox.addItemListener(new ItemListener(){
 			//シミュレーション領域の大きさを変更する関数を呼び出す.
 			@Override
@@ -236,6 +237,7 @@ public class AntsControlPanel {
 		});
 
 		sizeComboBox.setSelectedItem("50");
+		*/
 		
 		final JCheckBox showAdvanced = new JCheckBox("Advanced");
 		showAdvanced.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -257,13 +259,13 @@ public class AntsControlPanel {
 		panel.add(speedSlider);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
-		panel.add(antsSlider);
+		panel.add(antsTextField);
 		panel.add(Box.createGlue());
 		panel.add(blockPanel);
 		panel.add(Box.createGlue());
 		
-		panel.add(sizeLabel);
-		panel.add(sizeComboBox);
+		//panel.add(sizeLabel);
+		//panel.add(sizeComboBox);
 		panel.add(Box.createGlue());
 		panel.add(foodRequiredPanel);
 		panel.add(Box.createGlue());
