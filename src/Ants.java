@@ -218,6 +218,7 @@ public class Ants extends JPanel{
 				}else if (feald[i][j]>0){
 					System.out.println("Goal"); 
 					cellArray[i][j].setIsGoal(true,feald[i][j]);	
+					food.add(cellArray[i][j]);
 				
 				}
 			}
