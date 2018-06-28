@@ -141,7 +141,10 @@ public class Cell {
 
 	//測定を開始する
 	public void observe() {
+		//測定期間に入る.
 		isObserved = true;
+		//自転車置き場が乱れる.
+		hasFood = true;
 		System.out.println("セル" + c + "," + r + "測定開始!");
 	}
 
