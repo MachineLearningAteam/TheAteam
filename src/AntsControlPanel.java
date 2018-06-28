@@ -85,6 +85,7 @@ public class AntsControlPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("測定開始!");
+				ants.observe();
 			}
 		});
 		

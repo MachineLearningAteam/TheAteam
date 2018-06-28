@@ -60,6 +60,11 @@ public class Ants extends JPanel{
 	//最初にシミュレーション領域の上部に表示される簡単な説明書き
 	final JInternalFrame messageFrame = new JInternalFrame("Getting Started", false, true);
 
+	//測定状態に入っているかどうか
+	private boolean isObserved = false;
+	//測定状態に入ってから何ステップ経過したか
+	private int step = 0;
+
 	//コンストラクタ
 	public Ants(){
 
@@ -382,6 +387,10 @@ public class Ants extends JPanel{
 		}
 		//再描画
 		repaint();
+		//観測がどれくらい進んでいるか
+		if(isObserved)step++;
+		System.out.println("step=" + step);
+		if(step == 120)System.out.println("測定終了!");
 	}
 
 	//AdvancedのAboutを呼び出した時に呼び出される関数.各パラメータの説明書きを表示する.
@@ -403,5 +412,10 @@ public class Ants extends JPanel{
 			if(cellArray[ants.get(0).getCol()][ants.get(0).getRow()].isSet())cellArray[ants.get(0).getCol()][ants.get(0).getRow()].endSet();
 			ants.remove(0);
 		}
+	}
+
+	//測定を開始する.
+	public void observe() {
+		isObserved = true;
 	}
 }
