@@ -396,7 +396,15 @@ public class Ants extends JPanel{
 		if(stepSoFar == observingTime)
 		{
 			System.out.println("測定終了!");
+			//各自転車置き場のの乱れステップ数
 			for(int column = 0; column < columns; column++)for(int row = 0; row < rows; row++)if(cellArray[column][row].isGoal())System.out.println("自転車置き場" + column + "," + row + "乱れステップ数" + cellArray[column][row].getHasFoodSteps());
+			//乱れ率の計算
+			//各自転車置き場のの乱れステップ数の合計
+			int hasFoodStepsSum = 0;
+			for(int column = 0; column < columns; column++)for(int row = 0; row < rows; row++)if(cellArray[column][row].isGoal())hasFoodStepsSum += cellArray[column][row].getHasFoodSteps();
+			System.out.println("hasFoodStepsSum=" + hasFoodStepsSum);
+			//乱れ率
+			System.out.println("乱れ率" + ((double)hasFoodStepsSum / (double)(observingTime * food.size())));
 			//プログラムを終了する.
 			System.exit(0);
 		}
