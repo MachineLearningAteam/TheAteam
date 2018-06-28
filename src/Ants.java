@@ -65,7 +65,7 @@ public class Ants extends JPanel{
 	//測定状態に入ってから何ステップ経過したか
 	private int stepSoFar = 0;
 	//測定にかかるステップ数(本番は12000)
-	final private int observingTime = 120;
+	final private int observingTime = 12000;
 
 	//コンストラクタ
 	public Ants(){
@@ -236,8 +236,8 @@ public class Ants extends JPanel{
 		//各自転車置き場が乱れる確率を設定する.
 		for(int i=0;i<columns;i++)for(int j=0;j<rows;j++)if(cellArray[i][j].isGoal())
 		{
-			System.out.println("セル" + i + "," + j + "赤画素値" + (double)feald[i][j]);
-			System.out.println("セル" + i + "," + j + "乱れる確率" + (double)feald[i][j] / 0x100 / food.size());
+			//System.out.println("セル" + i + "," + j + "赤画素値" + (double)feald[i][j]);
+			//System.out.println("セル" + i + "," + j + "乱れる確率" + (double)feald[i][j] / 0x100 / food.size());
 			cellArray[i][j].setFoodProbability((double)feald[i][j] / 0x100 / food.size() );
 		}
 		
@@ -402,18 +402,19 @@ public class Ants extends JPanel{
 		repaint();
 		//観測がどれくらい進んでいるか
 		if(isObserved)stepSoFar++;
-		System.out.println("stepSoFar=" + stepSoFar);
+		//100ステップずつ進捗を確認できるようにする.
+		if(isObserved && stepSoFar % 100 == 0)System.out.println("stepSoFar=" + stepSoFar);
 		//測定期間が終了した場合
 		if(stepSoFar == observingTime)
 		{
-			System.out.println("測定終了!");
+			//System.out.println("測定終了!");
 			//各自転車置き場のの乱れステップ数
-			for(int column = 0; column < columns; column++)for(int row = 0; row < rows; row++)if(cellArray[column][row].isGoal())System.out.println("自転車置き場" + column + "," + row + "乱れステップ数" + cellArray[column][row].getHasFoodSteps());
+			//for(int column = 0; column < columns; column++)for(int row = 0; row < rows; row++)if(cellArray[column][row].isGoal())System.out.println("自転車置き場" + column + "," + row + "乱れステップ数" + cellArray[column][row].getHasFoodSteps());
 			//乱れ率の計算
 			//各自転車置き場のの乱れステップ数の合計
 			int hasFoodStepsSum = 0;
 			for(int column = 0; column < columns; column++)for(int row = 0; row < rows; row++)if(cellArray[column][row].isGoal())hasFoodStepsSum += cellArray[column][row].getHasFoodSteps();
-			System.out.println("hasFoodStepsSum=" + hasFoodStepsSum);
+			//System.out.println("hasFoodStepsSum=" + hasFoodStepsSum);
 			//乱れ率
 			System.out.println("乱れ率" + ((double)hasFoodStepsSum / (double)(observingTime * food.size())));
 			//プログラムを終了する.

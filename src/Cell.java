@@ -63,7 +63,7 @@ public class Cell {
 		//食べ物セルは一定の確率で食べ物が発生する.
 		if(isGoal && !hasFood && !isSet && Math.random() < foodProbability)
 		{
-			System.out.println("セル" + c + "," + r + "乱れました.");
+			//System.out.println("セル" + c + "," + r + "乱れました.");
 			hasFood = true;
 		}
 		//測定中で自転車が乱れていたら乱れているステップ数をインクリメントする.
@@ -128,13 +128,13 @@ public class Cell {
 
 	//警備員がその食べ物セルの自転車整理を開始する.
 	public void beginSet() {
-		System.out.println("セル" + c + "," + r + "整理します.");
+		//System.out.println("セル" + c + "," + r + "整理します.");
 		isSet = true;
 	}
 
 	//警備員がその食べ物セルの自転車整理を完了する.
 	public void endSet() {
-		System.out.println("セル" + c + "," + r + "整理終わりました.");
+		//System.out.println("セル" + c + "," + r + "整理終わりました.");
 		isSet = false;
 		hasFood = false;
 	}
@@ -145,7 +145,7 @@ public class Cell {
 		isObserved = true;
 		//自転車置き場が乱れる.
 		hasFood = true;
-		System.out.println("セル" + c + "," + r + "測定開始!");
+		//System.out.println("セル" + c + "," + r + "測定開始!");
 	}
 
 	//測定中に乱れていたステップ数
