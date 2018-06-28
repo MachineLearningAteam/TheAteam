@@ -124,12 +124,12 @@ public class Cell {
 	public void beginSet() {
 		System.out.println("セル" + c + "," + r + "整理します.");
 		isSet = true;
-		hasFood = false;
 	}
 
 	//警備員がその食べ物セルの自転車整理を完了する.
 	public void endSet() {
 		System.out.println("セル" + c + "," + r + "整理終わりました.");
 		isSet = false;
+		hasFood = false;
 	}
 }

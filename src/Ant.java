@@ -155,8 +155,8 @@ public class Ant {
 
 				x = bestCellSoFar.c;
 				y = bestCellSoFar.r;
-				//移動先のセルで自転車が乱れている場合自転車整理を開始する.
-				if(world[x][y].isGoal() && world[x][y].hasFood())
+				//移動先のセルで自転車が乱れていて誰も整理していない場合自転車整理を開始する.
+				if(world[x][y].isGoal() && world[x][y].hasFood() && !world[x][y].isSet())
 				{
 					waitTime = world[x][y].getWaitTime();
 					world[x][y].beginSet();
@@ -177,8 +177,8 @@ public class Ant {
 
 						x = neighbor.c;
 						y = neighbor.r;
-						//移動先のセルで自転車が乱れている場合自転車整理を開始する.
-						if(world[x][y].isGoal() && world[x][y].hasFood())
+						//移動先のセルで自転車が乱れていて誰も整理していない場合自転車整理を開始する.
+						if(world[x][y].isGoal() && world[x][y].hasFood() && !world[x][y].isSet())
 						{
 							waitTime = world[x][y].getWaitTime();
 							world[x][y].beginSet();
@@ -199,8 +199,8 @@ public class Ant {
 
 							x = neighbor.c;
 							y = neighbor.r;
-							//移動先のセルで自転車が乱れている場合自転車整理を開始する.
-							if(world[x][y].isGoal() && world[x][y].hasFood())
+							//移動先のセルで自転車が乱れていて誰も整理していない場合自転車整理を開始する.
+							if(world[x][y].isGoal() && world[x][y].hasFood() && !world[x][y].isSet())
 							{
 								waitTime = world[x][y].getWaitTime();
 								world[x][y].beginSet();
