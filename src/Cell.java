@@ -23,6 +23,10 @@ public class Cell {
 	private boolean hasFood = false;
 	//このセルが食べ物セルであった場合,警備員がこのセルの自転車を整理中であるかどうか
 	private boolean isSet = false;
+	//このセルが食べ物セルであった場合,測定期間中に食べ物が発生していたステップ数
+	private int hasFoodSteps = 0;
+	//測定中であるかどうか
+	private boolean isObserved = false;
 	//そのセルの行番号列番号
 	int c;
 	int r;
@@ -131,5 +135,11 @@ public class Cell {
 		System.out.println("セル" + c + "," + r + "整理終わりました.");
 		isSet = false;
 		hasFood = false;
+	}
+
+	//測定を開始する
+	public void observe() {
+		isObserved = true;
+		System.out.println("セル" + c + "," + r + "測定開始!");
 	}
 }

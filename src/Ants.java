@@ -423,5 +423,7 @@ public class Ants extends JPanel{
 	//測定を開始する.
 	public void observe() {
 		isObserved = true;
+		//各セルの測定を開始する.
+		for(Cell[] cellRow : cellArray)for(Cell cell : cellRow)cell.observe();
 	}
 }
