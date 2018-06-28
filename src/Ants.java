@@ -201,7 +201,6 @@ public class Ants extends JPanel{
 		
 		killAllCells();
 		//ここにマップの初期状態を記述する.
-		//シミュレーション領域の中央に巣を配置する.
 		int[][] feald;
 		feald = new int[100][100];
 		Imagefileload feald_data = new Imagefileload();
