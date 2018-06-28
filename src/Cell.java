@@ -23,6 +23,10 @@ public class Cell {
 	private boolean hasFood = false;
 	//このセルが食べ物セルであった場合,警備員がこのセルの自転車を整理中であるかどうか
 	private boolean isSet = false;
+	//このセルが食べ物セルであった場合,測定期間中に食べ物が発生していたステップ数
+	private int hasFoodSteps = 0;
+	//測定中であるかどうか
+	private boolean isObserved = false;
 	//そのセルの行番号列番号
 	int c;
 	int r;
@@ -62,6 +66,8 @@ public class Cell {
 			System.out.println("セル" + c + "," + r + "乱れました.");
 			hasFood = true;
 		}
+		//測定中で自転車が乱れていたら乱れているステップ数をインクリメントする.
+		if(isObserved && hasFood)hasFoodSteps++;
 	}
 
 	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
@@ -124,12 +130,23 @@ public class Cell {
 	public void beginSet() {
 		System.out.println("セル" + c + "," + r + "整理します.");
 		isSet = true;
-		hasFood = false;
 	}
 
 	//警備員がその食べ物セルの自転車整理を完了する.
 	public void endSet() {
 		System.out.println("セル" + c + "," + r + "整理終わりました.");
 		isSet = false;
+		hasFood = false;
+	}
+
+	//測定を開始する
+	public void observe() {
+		isObserved = true;
+		System.out.println("セル" + c + "," + r + "測定開始!");
+	}
+
+	//測定中に乱れていたステップ数
+	public int getHasFoodSteps() {
+		return hasFoodSteps;
 	}
 }

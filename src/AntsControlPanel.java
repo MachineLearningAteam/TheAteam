@@ -75,6 +75,19 @@ public class AntsControlPanel {
 			}
 		});
 
+		final JButton observeButton = new JButton("Observe");
+		observeButton.setMinimumSize(controlDimension);
+		observeButton.setMaximumSize(controlDimension);
+		observeButton.setPreferredSize(controlDimension);
+		observeButton.setFocusable(false);
+		observeButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		observeButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("測定開始!");
+				ants.observe();
+			}
+		});
 		
 		JLabel antsLabel = new JLabel("Ant Count:");
 		antsLabel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -167,6 +180,7 @@ public class AntsControlPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(timerButton);
 		panel.add(stepButton);
+		panel.add(observeButton);
 		panel.add(Box.createGlue());
 		panel.add(antsLabel);
 		panel.add(antsTextField);
