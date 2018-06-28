@@ -392,9 +392,12 @@ public class Ants extends JPanel{
 		//観測がどれくらい進んでいるか
 		if(isObserved)stepSoFar++;
 		System.out.println("stepSoFar=" + stepSoFar);
+		//測定期間が終了した場合
 		if(stepSoFar == observingTime)
 		{
 			System.out.println("測定終了!");
+			for(int column = 0; column < columns; column++)for(int row = 0; row < rows; row++)if(cellArray[column][row].isGoal())System.out.println("自転車置き場" + column + "," + row + "乱れステップ数" + cellArray[column][row].getHasFoodSteps());
+			//プログラムを終了する.
 			System.exit(0);
 		}
 	}
@@ -424,6 +427,6 @@ public class Ants extends JPanel{
 	public void observe() {
 		isObserved = true;
 		//各セルの測定を開始する.
-		for(Cell[] cellRow : cellArray)for(Cell cell : cellRow)cell.observe();
+		for(Cell[] cellRow : cellArray)for(Cell cell : cellRow)if(cell.isGoal())cell.observe();
 	}
 }

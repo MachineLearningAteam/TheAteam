@@ -66,6 +66,8 @@ public class Cell {
 			System.out.println("セル" + c + "," + r + "乱れました.");
 			hasFood = true;
 		}
+		//測定中で自転車が乱れていたら乱れているステップ数をインクリメントする.
+		if(isObserved && hasFood)hasFoodSteps++;
 	}
 
 	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
@@ -141,5 +143,10 @@ public class Cell {
 	public void observe() {
 		isObserved = true;
 		System.out.println("セル" + c + "," + r + "測定開始!");
+	}
+
+	//測定中に乱れていたステップ数
+	public int getHasFoodSteps() {
+		return hasFoodSteps;
 	}
 }
