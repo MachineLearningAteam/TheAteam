@@ -35,7 +35,7 @@ public class Ants extends JPanel{
 		OBSTACLE/*障害物*/, NEST/*巣*/, GOAL/*食べ物*/, CLEAR/*何もない*/; 
 	}
 	//Place tileで選択されているやつ
-	private Tile tile = Tile.GOAL;
+	//private Tile tile = Tile.GOAL;
 
 	//シミュレーション領域内にセルが100*100個ある.
 	int rows = 100;
@@ -115,6 +115,7 @@ public class Ants extends JPanel{
 		
 		
 		//シミュレーション領域をクリックするとクリックしたセルにPlace Tileで選択されているやつが配置されるやつ
+		/*
 		addMouseListener(new MouseAdapter(){
 			//シミュレーション領域がクリックされた時の処理
 			@Override
@@ -156,8 +157,10 @@ public class Ants extends JPanel{
 				repaint();
 			}
 		});
+		*/
 
 		//シミュレーション領域上をマウスでドラッグしたときにそのセルにPlace Tileで選択されていたやつが配置されるやつ
+		/*
 		addMouseMotionListener(new MouseAdapter(){
 			//以前マウスが置かれていたセルの座標.
 			private int previousColumn = -1;
@@ -202,6 +205,7 @@ public class Ants extends JPanel{
 				}
 			}
 		});
+		*/
 		//背景色を白にする.
 		setBackground(Color.WHITE);
 		//シミュレーション領域を巣も食べ物もない状態にする.
@@ -424,9 +428,11 @@ public class Ants extends JPanel{
 	}
 
 	//Place Tileのボタンを押した時に呼び出される関数.セルをクリックした時にそのセルをどの状態に変えるかを変更する.
+	/*
 	public void setTileToAdd(Tile tile) {
 		this.tile = tile;
 	}
+	*/
 
 	//Ant Countのスライダーを動かした時に呼び出される関数.蟻の数の最大値を変更する.
 	public void setMaxAnts(int maxAnts) {

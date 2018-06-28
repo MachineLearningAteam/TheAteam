@@ -107,11 +107,12 @@ public class AntsControlPanel {
 		ants.setMaxAnts(1);
 		
 		
-		JPanel blockPanel = new JPanel();
-		blockPanel.setLayout(new BoxLayout(blockPanel, BoxLayout.Y_AXIS));
-		blockPanel.setBorder(BorderFactory.createTitledBorder("Place Tile"));
+		//JPanel blockPanel = new JPanel();
+		//blockPanel.setLayout(new BoxLayout(blockPanel, BoxLayout.Y_AXIS));
+		//blockPanel.setBorder(BorderFactory.createTitledBorder("Place Tile"));
 		
 		
+		/*
 		JRadioButton obstacle = new JRadioButton("Obstacle");
 		obstacle.setFocusable(false);
 		obstacle.addActionListener(new ActionListener(){
@@ -144,25 +145,30 @@ public class AntsControlPanel {
 				ants.setTileToAdd(Ants.Tile.CLEAR);
 			}
 		});
+		*/
 		
+		/*
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(obstacle);
 		bg.add(nest);
 		bg.add(goal);
 		bg.add(clear);
 		goal.setSelected(true);
+		*/
 		
-		blockPanel.add(obstacle);
-		blockPanel.add(nest);
-		blockPanel.add(goal);
-		blockPanel.add(clear);
+		//blockPanel.add(obstacle);
+		//blockPanel.add(nest);
+		//blockPanel.add(goal);
+		//blockPanel.add(clear);
 		
-		blockPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		//blockPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
+		/*
 		JPanel foodRequiredPanel = new JPanel();
 		foodRequiredPanel.setLayout(new BoxLayout(foodRequiredPanel, BoxLayout.Y_AXIS));
 		foodRequiredPanel.setBorder(BorderFactory.createTitledBorder("Food Needed"));
 		foodRequiredPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		*/
 
 		final JCheckBox showAdvanced = new JCheckBox("Advanced");
 		showAdvanced.setAlignmentX(JComponent.CENTER_ALIGNMENT);
@@ -185,11 +191,11 @@ public class AntsControlPanel {
 		panel.add(antsLabel);
 		panel.add(antsTextField);
 		panel.add(Box.createGlue());
-		panel.add(blockPanel);
-		panel.add(Box.createGlue());
-		panel.add(Box.createGlue());
-		panel.add(foodRequiredPanel);
-		panel.add(Box.createGlue());
+		//panel.add(blockPanel);
+		//panel.add(Box.createGlue());
+		//panel.add(Box.createGlue());
+		//panel.add(foodRequiredPanel);
+		//panel.add(Box.createGlue());
 		panel.add(Box.createGlue());
 		panel.add(showAdvanced);
 	}
