@@ -229,6 +229,13 @@ public class Ants extends JPanel{
 				}
 			}
 		}
+		//各自転車置き場が乱れる確率を設定する.
+		for(int i=0;i<columns;i++)for(int j=0;j<rows;j++)if(cellArray[i][j].isGoal())
+		{
+			System.out.println("セル" + i + "," + j + "赤画素値" + (double)feald[i][j]);
+			System.out.println("セル" + i + "," + j + "乱れる確率" + (double)feald[i][j] / 0x100 / food.size());
+			cellArray[i][j].setFoodProbability((double)feald[i][j] / 0x100 / food.size() );
+		}
 		
 		//nests.add(cellArray[columns/2][rows/2]);
 		//再描画

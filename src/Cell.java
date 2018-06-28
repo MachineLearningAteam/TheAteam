@@ -18,7 +18,7 @@ public class Cell {
 	//このセルが食べ物セルであった場合の,警備員が自転車整理にかかる時間
 	private int waitTime;
 	//このセルが食べ物セルであった場合の,食べ物が発生する確率
-	private double foodProbability = 0.1;
+	private double foodProbability;
 	//このセルが食べ物セルであった場合,食べ物が発生しているかどうか
 	private boolean hasFood = false;
 	//このセルが食べ物セルであった場合,警備員がこのセルの自転車を整理中であるかどうか
@@ -151,5 +151,10 @@ public class Cell {
 	//測定中に乱れていたステップ数
 	public int getHasFoodSteps() {
 		return hasFoodSteps;
+	}
+
+	//自転車置き場が1ステップ値に乱れる確率を設定する.
+	public void setFoodProbability(double probability) {
+		foodProbability = probability;
 	}
 }
