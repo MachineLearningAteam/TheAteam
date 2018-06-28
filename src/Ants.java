@@ -63,7 +63,9 @@ public class Ants extends JPanel{
 	//測定状態に入っているかどうか
 	private boolean isObserved = false;
 	//測定状態に入ってから何ステップ経過したか
-	private int step = 0;
+	private int stepSoFar = 0;
+	//測定にかかるステップ数(本番は12000)
+	final private int observingTime = 120;
 
 	//コンストラクタ
 	public Ants(){
@@ -388,9 +390,13 @@ public class Ants extends JPanel{
 		//再描画
 		repaint();
 		//観測がどれくらい進んでいるか
-		if(isObserved)step++;
-		System.out.println("step=" + step);
-		if(step == 120)System.out.println("測定終了!");
+		if(isObserved)stepSoFar++;
+		System.out.println("stepSoFar=" + stepSoFar);
+		if(stepSoFar == observingTime)
+		{
+			System.out.println("測定終了!");
+			System.exit(0);
+		}
 	}
 
 	//AdvancedのAboutを呼び出した時に呼び出される関数.各パラメータの説明書きを表示する.
