@@ -449,7 +449,7 @@ public class Ants extends JPanel{
 	public void observe() {
 		isObserved = true;
 		//各セルの測定を開始する.
-		for(Cell[] cellRow : cellArray)for(Cell cell : cellRow)if(cell.isGoal())cell.observe();
+		for(Cell[] cellRow : cellArray)for(Cell cell : cellRow)cell.observe();
 	}
 
 	//測定中かどうか
