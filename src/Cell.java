@@ -71,7 +71,7 @@ public class Cell {
 			hasFood = true;
 		}
 		//測定中で自転車が乱れていたら乱れているステップ数をインクリメントする.
-		if(isObserved && hasFood)hasFoodSteps++;
+		if(isObserved && (hasFood && !isSet))hasFoodSteps++;
 	}
 
 	//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
