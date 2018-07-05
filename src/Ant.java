@@ -114,8 +114,8 @@ public class Ant {
 					}
 
 					for(Cell food : foodFound){
-						//蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
-						world[x][y].setFoodPheromone(food, maxFoodSoFarMap.get(food) * Ant.dropoffRate);
+						//測定中でない場合蟻が食べ物フェロモンをそのセルに運んできた時に呼び出される関数.その蟻が運んできた食べ物フェロモンを自身の食べ物フェロモンマップに追加または更新する.
+						if(!ants.isObserved())world[x][y].setFoodPheromone(food, maxFoodSoFarMap.get(food) * Ant.dropoffRate);
 					}
 					//環境中に食べ物セルがない場合
 					if(ants.getFood().isEmpty()){

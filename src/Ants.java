@@ -451,4 +451,9 @@ public class Ants extends JPanel{
 		//各セルの測定を開始する.
 		for(Cell[] cellRow : cellArray)for(Cell cell : cellRow)if(cell.isGoal())cell.observe();
 	}
+
+	//測定中かどうか
+	public boolean isObserved() {
+		return isObserved;
+	}
 }

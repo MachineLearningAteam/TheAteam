@@ -45,20 +45,24 @@ public class Cell {
 	
 	//状態遷移関数
 	public void step(){
-		//そのセルにフェロモンが届いている各食べ物セルについて
-		for(Cell food : foodPheromoneLevelMap.keySet()){
-			//その食べ物セルから届いている食べ物フェロモンの強さ
-			double foodPheromoneLevel = foodPheromoneLevelMap.get(food);
-			//食べ物フェロモンを蒸発させる.
-			foodPheromoneLevel *= Cell.evaporationRate;
-			if(foodPheromoneLevel < 1){
-				foodPheromoneLevel = 1;
+		//測定中でない場合,食べ物フェロモンを蒸発させる.
+		if(!isObserved)
+		{
+			//そのセルにフェロモンが届いている各食べ物セルについて
+			for(Cell food : foodPheromoneLevelMap.keySet()){
+				//その食べ物セルから届いている食べ物フェロモンの強さ
+				double foodPheromoneLevel = foodPheromoneLevelMap.get(food);
+				//食べ物フェロモンを蒸発させる.
+				foodPheromoneLevel *= Cell.evaporationRate;
+				if(foodPheromoneLevel < 1){
+					foodPheromoneLevel = 1;
+				}
+				if(foodPheromoneLevel > Cell.maxFoodPheromoneLevel){
+					foodPheromoneLevel = Cell.maxFoodPheromoneLevel;
+				}
+				//食べ物フェロモンの強さを更新する.
+				foodPheromoneLevelMap.put(food, foodPheromoneLevel);
 			}
-			if(foodPheromoneLevel > Cell.maxFoodPheromoneLevel){
-				foodPheromoneLevel = Cell.maxFoodPheromoneLevel;
-			}
-			//食べ物フェロモンの強さを更新する.
-			foodPheromoneLevelMap.put(food, foodPheromoneLevel);
 		}
 		//食べ物セルは一定の確率で食べ物が発生する.
 		if(isGoal && !hasFood && !isSet && Math.random() < foodProbability)
