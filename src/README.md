@@ -1,4 +1,4 @@
-# 使い方
+﻿# 使い方
 ## コンパイル
 ```
 $ javac -encoding utf-8 *.java
